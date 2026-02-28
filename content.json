@@ -1,0 +1,777 @@
+{
+  "cours": {
+    "titre": "Intelligence Artificielle",
+    "partie": "Analyse des Données",
+    "universite": "Université Mohammed V",
+    "etablissement": "EST-Salé",
+    "niveau": "MI-GEII 2ème année",
+    "professeur": "Halima HOUSNY"
+  },
+  "modules": [
+    {
+      "id": "introduction",
+      "titre": "Introduction à l'analyse des données avec Python",
+      "bibliotheques": [
+        {
+          "nom": "numpy",
+          "url": "http://www.numpy.org/",
+          "description": "Améliore les capacités d'analyse numérique"
+        },
+        {
+          "nom": "pandas",
+          "url": "https://pandas.pydata.org/",
+          "description": "Traitement des données rapide et efficace"
+        },
+        {
+          "nom": "matplotlib",
+          "url": "https://matplotlib.org/gallery/index.html",
+          "description": "Tracés scientifiques de haute qualité"
+        },
+        {
+          "nom": "scipy",
+          "url": "https://www.scipy.org/",
+          "description": "Fournit tous les algorithmes scientifiques classiques"
+        }
+      ]
+    },
+    {
+      "id": "modules_python",
+      "titre": "Comment utiliser un module en Python",
+      "concepts": [
+        "Un module Python est un fichier .py composé de code Python",
+        "Tout fichier Python peut être référencé en tant que module",
+        "Peut définir des fonctions, des classes et des variables",
+        "Utiliser le mot-clé import avec le nom du module"
+      ],
+      "syntaxes_import": [
+        {
+          "syntaxe": "import <nom_module>",
+          "usage": "Importe le module entier",
+          "exemple": "import math",
+          "acces": "math.sqrt(25)"
+        },
+        {
+          "syntaxe": "from <nom_module> import <nom_fonction>",
+          "usage": "Importe une fonction spécifique",
+          "exemple": "from math import sqrt",
+          "acces": "sqrt(25)"
+        },
+        {
+          "syntaxe": "from <nom_module> import <f1>, <f2>",
+          "usage": "Importe plusieurs fonctions",
+          "exemple": "from math import pi, sin, cos",
+          "acces": "pi, sin(0)"
+        },
+        {
+          "syntaxe": "import nom_module as alias",
+          "usage": "Importe le module avec un alias",
+          "exemple": "import numpy as np",
+          "acces": "np.array(...)"
+        },
+        {
+          "syntaxe": "from nom_module import *",
+          "usage": "Importe tout le contenu du module",
+          "exemple": "from numpy import *",
+          "acces": "array(...)"
+        }
+      ]
+    },
+    {
+      "id": "numpy",
+      "titre": "Le module NumPy",
+      "import": [
+        "import numpy",
+        "import numpy as np"
+      ],
+      "presentation": [
+        "Bibliothèque la plus importante pour le calcul scientifique",
+        "Offre des fonctions mathématiques complètes",
+        "Fournit les structures de données de tableaux (array) à n dimensions (ndarray)"
+      ],
+      "sous_sections": [
+        {
+          "titre": "Création de tableaux (array)",
+          "contenu": [
+            "Les objets de type array correspondent à des tableaux à une ou plusieurs dimensions",
+            "Permettent d'effectuer du calcul vectoriel",
+            "La fonction array() convertit un conteneur (liste ou tuple) en objet array",
+            "Un objet array ne contient que des données homogènes de type identique"
+          ],
+          "exemples": [
+            {
+              "code": "a = [1, 2, 3]\nnp.array(a)",
+              "resultat": "array([1, 2, 3])"
+            },
+            {
+              "code": "t = (19, 52, 77)\nnp.array(t)",
+              "resultat": "array([19, 52, 77])"
+            },
+            {
+              "code": "b = [1, 2, 'IEE']\nnp.array(b)",
+              "resultat": "array(['1', '2', 'IEE'], dtype='<U21')"
+            },
+            {
+              "code": "c = [1, 2, 3.9]\nnp.array(c)",
+              "resultat": "array([1., 2., 3.9])"
+            },
+            {
+              "code": "d = [1, 2, True]\nnp.array(d)",
+              "resultat": "array([1, 2, 1])"
+            },
+            {
+              "code": "e = [1., 2.6, True]\nnp.array(e)",
+              "resultat": "array([1., 2.6, 1.])"
+            }
+          ]
+        },
+        {
+          "titre": "Fonction arange()",
+          "contenu": [
+            "Sur un modèle similaire à range(), arange() construit un array à une dimension",
+            "Peut générer des entiers ou des floats"
+          ],
+          "exemples": [
+            {
+              "code": "np.arange(10, 0, -1)",
+              "resultat": "array([10, 9, 8, 7, 6, 5, 4, 3, 2, 1])"
+            },
+            {
+              "code": "np.arange(1, 10.5, 0.5)",
+              "resultat": "array([1., 1.5, 2., ..., 9.5, 10.])"
+            }
+          ]
+        },
+        {
+          "titre": "Tableaux à double dimensions",
+          "contenu": [
+            "Possible de construire des objets arrays à deux dimensions",
+            "Passer une liste de listes à la fonction array()",
+            "Accès via a[i][j] ou a[i,j]"
+          ],
+          "exemples": [
+            {
+              "code": "np.array([[1, 2], [3, 4], [5, 6]])",
+              "resultat": "array([[1, 2], [3, 4], [5, 6]])"
+            },
+            {
+              "code": "w = np.array([[1, 2], [3, 4], [5, 6]])\nw[2,1]",
+              "resultat": "np.int64(6)"
+            },
+            {
+              "code": "w[0][1]",
+              "resultat": "np.int64(2)"
+            }
+          ]
+        },
+        {
+          "titre": "Opérations sur les tableaux",
+          "contenu": [
+            "Sur un objet array on peut effectuer des opérations vectorielles élément par élément"
+          ],
+          "exemples": [
+            {
+              "code": "v=[5,6,23]\nw=np.array(v)\nw+1",
+              "resultat": "array([6, 7, 24])"
+            },
+            {
+              "code": "w*2",
+              "resultat": "array([10, 12, 46])"
+            },
+            {
+              "code": "w*w",
+              "resultat": "array([25, 36, 529])"
+            }
+          ]
+        },
+        {
+          "titre": "Attributs des tableaux",
+          "attributs": [
+            {
+              "nom": "ndim",
+              "description": "Nombre de dimensions"
+            },
+            {
+              "nom": "size",
+              "description": "Nombre total d'éléments"
+            },
+            {
+              "nom": "shape",
+              "description": "Forme du tableau (tuple)"
+            }
+          ],
+          "methodes_reshape": [
+            {
+              "nom": "reshape((r,c))",
+              "description": "Retourne un nouveau tableau sans modifier l'original"
+            },
+            {
+              "nom": "resize((r,c))",
+              "description": "Modifie le tableau en place (remplit avec 0 si nécessaire)"
+            }
+          ]
+        },
+        {
+          "titre": "Méthodes appliquées sur des tableaux",
+          "methodes": [
+            {
+              "nom": "len(X)",
+              "description": "Nombre d'éléments"
+            },
+            {
+              "nom": "X.min()",
+              "description": "Valeur minimale"
+            },
+            {
+              "nom": "X.max()",
+              "description": "Valeur maximale"
+            },
+            {
+              "nom": "X.mean()",
+              "description": "Moyenne des valeurs"
+            },
+            {
+              "nom": "X.sum()",
+              "description": "Somme des valeurs"
+            }
+          ],
+          "exemple": {
+            "code": "X = np.arange(1, 10, 1)",
+            "resultats": {
+              "len": 9,
+              "min": 1,
+              "max": 9,
+              "mean": 5.0,
+              "sum": 45
+            }
+          }
+        },
+        {
+          "titre": "Fonctions couramment utilisées",
+          "fonctions": [
+            {
+              "nom": "numpy.linspace(start, stop, num=50, endpoint=True, retstep=False)",
+              "description": "Génère des valeurs régulièrement espacées",
+              "exemples": [
+                {
+                  "code": "np.linspace(1, 100, 6)",
+                  "resultat": "array([1., 20.8, 40.6, 60.4, 80.2, 100.])"
+                },
+                {
+                  "code": "np.linspace(1, 100, 6, endpoint=False)",
+                  "resultat": "array([1., 17.5, 34., 50.5, 67., 83.5])"
+                }
+              ]
+            },
+            {
+              "nom": "numpy.ones(shape, dtype=None)",
+              "description": "Crée un tableau rempli de 1",
+              "exemples": [
+                {
+                  "code": "np.ones(3)",
+                  "resultat": "array([1., 1., 1.])"
+                },
+                {
+                  "code": "np.ones((3,2))",
+                  "resultat": "array([[1., 1.], [1., 1.], [1., 1.]])"
+                }
+              ]
+            },
+            {
+              "nom": "numpy.zeros(shape, dtype=None)",
+              "description": "Crée un tableau rempli de 0",
+              "exemples": [
+                {
+                  "code": "np.zeros(3)",
+                  "resultat": "array([0., 0., 0.])"
+                },
+                {
+                  "code": "np.zeros((3,2))",
+                  "resultat": "array([[0., 0.], [0., 0.], [0., 0.]])"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "titre": "Application",
+          "contexte": "Un professeur analyse la relation entre les heures d'études et les notes finales",
+          "donnees": {
+            "grades": [
+              50,
+              50,
+              47,
+              97,
+              49,
+              3,
+              53,
+              42,
+              26,
+              74,
+              82,
+              62,
+              37,
+              15,
+              70,
+              27,
+              36,
+              35,
+              48,
+              52,
+              63,
+              64
+            ],
+            "study_hours": [
+              10.0,
+              11.5,
+              9.0,
+              16.0,
+              9.25,
+              1.0,
+              11.5,
+              9.0,
+              8.5,
+              14.5,
+              15.5,
+              13.75,
+              9.0,
+              8.0,
+              15.5,
+              8.0,
+              9.0,
+              6.0,
+              10.0,
+              12.0,
+              12.5,
+              12.0
+            ]
+          },
+          "exercices": [
+            {
+              "num": 1,
+              "description": "Charger les notes dans un tableau numpy",
+              "code": "grades = np.array(data)"
+            },
+            {
+              "num": 2,
+              "description": "La taille du tableau",
+              "code": "grades.shape",
+              "resultat": "(22,)"
+            },
+            {
+              "num": 3,
+              "description": "Accès à une valeur",
+              "code": "grades[0]",
+              "resultat": 50
+            },
+            {
+              "num": 4,
+              "description": "Moyenne des valeurs",
+              "code": "grades.mean()",
+              "resultat": 49.18
+            },
+            {
+              "num": 5,
+              "description": "Créer un tableau bidimensionnel",
+              "code": "student_data = np.array([study_hours, grades])"
+            },
+            {
+              "num": 6,
+              "description": "Afficher la dimension",
+              "code": "student_data.shape",
+              "resultat": "(2, 22)"
+            },
+            {
+              "num": 7,
+              "description": "Accès à une valeur",
+              "code": "student_data[0][0]",
+              "resultat": 10.0
+            },
+            {
+              "num": 8,
+              "description": "Comparer les moyennes",
+              "resultats": {
+                "moy_temps_etude": 10.52,
+                "moy_note": 49.18
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pandas",
+      "titre": "Le module Pandas",
+      "import": "import pandas as pd",
+      "presentation": [
+        "Pandas = contraction de 'Panel Datas'",
+        "Bibliothèque Python populaire pour l'analyse et la manipulation de données",
+        "Se présente comme une application de tableur pour Python"
+      ],
+      "structures_principales": [
+        {
+          "nom": "Series",
+          "description": "Tableau étiqueté unidimensionnel capable de contenir des données de tout type",
+          "composants": [
+            "Index",
+            "Valeurs",
+            "Nom"
+          ],
+          "creation": [
+            {
+              "methode": "Série vide",
+              "code": "S = pd.Series()"
+            },
+            {
+              "methode": "À partir d'un tableau numpy",
+              "code": "t = np.array(['P','y','t','h','o','n'])\nS = pd.Series(t)"
+            },
+            {
+              "methode": "Avec index personnalisé",
+              "code": "S = pd.Series(t, index=[10,15,18,19,23,27])"
+            },
+            {
+              "methode": "À partir d'un scalaire",
+              "code": "S = pd.Series(6, index=[1,5,8,9])"
+            },
+            {
+              "methode": "À partir d'un dictionnaire",
+              "code": "d = {'nom':'Marzouki','prénom':'hilal','âge':22}\nS = pd.Series(d)"
+            }
+          ],
+          "acces": [
+            {
+              "code": "S[15]",
+              "resultat": "'y'"
+            },
+            {
+              "code": "S[1:4]",
+              "description": "Slice par position"
+            },
+            {
+              "code": "S[['âge']]",
+              "description": "Accès par étiquette"
+            }
+          ]
+        },
+        {
+          "nom": "DataFrame",
+          "description": "Structure bidimensionnelle avec colonnes étiquetées, mutable, types hétérogènes",
+          "composants": [
+            "Index des lignes",
+            "Entête de colonnes",
+            "Colonnes",
+            "Lignes"
+          ],
+          "creation": [
+            {
+              "methode": "À partir d'un dictionnaire",
+              "code": "d_Data = {'ID':[1,2,3],'Prénom':['Nabil','Mourad','Nisrine'],'Age':[21,19,20],'Taille':[169,177,174]}\ndf = pd.DataFrame(d_Data)"
+            },
+            {
+              "methode": "À partir d'une liste simple",
+              "code": "languages = ['Python','Java','PHP','C++','Javascript']\ndf = pd.DataFrame(languages)"
+            },
+            {
+              "methode": "À partir d'une liste avec index et colonnes",
+              "code": "df = pd.DataFrame(languages, index=[12,14,15,16,18], columns=['Langages'])"
+            },
+            {
+              "methode": "À partir d'une liste de listes",
+              "code": "Etudiant_data = [['Nabil','Nabil@gmail.com',21,'Rabat'],...]\ndf = pd.DataFrame(Etudiant_data, index=[1,2,3], columns=['Prénom','Email','Age','Ville'])"
+            },
+            {
+              "methode": "À partir d'un tableau numpy",
+              "code": "t = np.array([[1,'Nisrine',22,170],[2,'Rachid',37,190],[3,'Badr',29,181]])\ndf = pd.DataFrame(t, columns=['ID','Prénom','Age','Taille'])"
+            }
+          ],
+          "operations": [
+            {
+              "nom": "Parcours",
+              "code": "for x in df:\n    print(x)",
+              "note": "Itère sur les noms de colonnes"
+            },
+            {
+              "nom": "Accès colonne simple",
+              "code": "df['Prénom']"
+            },
+            {
+              "nom": "Accès plusieurs colonnes",
+              "code": "df[['Age','Prénom']]"
+            },
+            {
+              "nom": "Ajout de colonne",
+              "code": "Email = ['...','...','...']\ndf['Email'] = Email"
+            },
+            {
+              "nom": "Suppression avec del",
+              "code": "del df['Taille']"
+            },
+            {
+              "nom": "Suppression avec pop",
+              "code": "c = df.pop('Age')",
+              "note": "Retourne la colonne supprimée"
+            }
+          ],
+          "exploration": [
+            {
+              "nom": "loc par index",
+              "code": "df_students.loc[5]",
+              "description": "Accès à une ligne par index"
+            },
+            {
+              "nom": "loc par plage",
+              "code": "df_students.loc[0:5]",
+              "description": "Plage inclusive"
+            },
+            {
+              "nom": "iloc par position",
+              "code": "df_students.iloc[10:16]",
+              "description": "Plage exclusive"
+            },
+            {
+              "nom": "iloc avec colonnes",
+              "code": "df_students.iloc[2,[1,2]]",
+              "description": "Spécifier les colonnes par index"
+            },
+            {
+              "nom": "loc avec nom de colonne",
+              "code": "df_students.loc[7,'Grade']",
+              "resultat": 42
+            },
+            {
+              "nom": "info()",
+              "code": "df_students.info()",
+              "description": "Structure et types des colonnes"
+            },
+            {
+              "nom": "describe()",
+              "code": "df_students.describe()",
+              "description": "Statistiques descriptives"
+            },
+            {
+              "nom": "head(n)",
+              "code": "df_students.head(2)",
+              "description": "Premières n lignes"
+            },
+            {
+              "nom": "tail(n)",
+              "code": "df_students.tail(3)",
+              "description": "Dernières n lignes"
+            }
+          ],
+          "nettoyage": [
+            {
+              "nom": "drop",
+              "code": "df_students.drop(columns=['Grade'])",
+              "description": "Supprime des colonnes"
+            },
+            {
+              "nom": "isnull",
+              "code": "df_students.isnull()",
+              "description": "Détecte les valeurs nulles"
+            }
+          ],
+          "filtrage": [
+            {
+              "nom": "Filtrage par valeur (loc)",
+              "code": "df_students.loc[df_students['Name']=='Aicha']"
+            },
+            {
+              "nom": "Filtrage par query",
+              "code": "df_students.query('Name==\"Aicha\"')"
+            },
+            {
+              "nom": "Filtrage direct",
+              "code": "df_students[df_students.Name == 'Aicha']"
+            },
+            {
+              "nom": "Tri",
+              "code": "df_students.sort_values('Name')"
+            }
+          ],
+          "importation": [
+            {
+              "nom": "Lire CSV",
+              "code": "df = pd.read_csv('etudiants.csv')"
+            },
+            {
+              "nom": "Lire Excel",
+              "code": "df = pd.read_excel('etudiants.xlsx')"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "matplotlib",
+      "titre": "Le module Matplotlib",
+      "import": "import matplotlib.pyplot as plt",
+      "presentation": [
+        "Bibliothèque pour tracer des courbes sous Python",
+        "Utilise le module pyplot",
+        "La fonction plot() permet de créer des graphiques 2D"
+      ],
+      "syntaxe_base": "plt.plot(x, y, 'format')\nplt.show()",
+      "apparence": {
+        "couleurs": [
+          {
+            "code": "b",
+            "valeur": "bleu"
+          },
+          {
+            "code": "r",
+            "valeur": "rouge"
+          },
+          {
+            "code": "g",
+            "valeur": "vert"
+          },
+          {
+            "code": "w",
+            "valeur": "blanc"
+          },
+          {
+            "code": "k",
+            "valeur": "noir"
+          },
+          {
+            "code": "y",
+            "valeur": "jaune"
+          }
+        ],
+        "types_points": [
+          {
+            "code": ".",
+            "valeur": "point"
+          },
+          {
+            "code": "o",
+            "valeur": "cercle"
+          },
+          {
+            "code": "v",
+            "valeur": "triangle vers le bas"
+          },
+          {
+            "code": "x",
+            "valeur": "croix"
+          },
+          {
+            "code": "+",
+            "valeur": "plus"
+          },
+          {
+            "code": "^",
+            "valeur": "triangle vers le haut"
+          },
+          {
+            "code": "s",
+            "valeur": "square"
+          }
+        ],
+        "types_lignes": [
+          {
+            "code": "-",
+            "valeur": "trait continu"
+          },
+          {
+            "code": "--",
+            "valeur": "deux tirets"
+          },
+          {
+            "code": "-.",
+            "valeur": "tiret-point"
+          },
+          {
+            "code": ":",
+            "valeur": "pointillés"
+          }
+        ]
+      },
+      "fonctions_informations": [
+        {
+          "nom": "plt.xlabel('texte')",
+          "description": "Légende axe X"
+        },
+        {
+          "nom": "plt.ylabel('texte')",
+          "description": "Légende axe Y"
+        },
+        {
+          "nom": "plt.title('texte')",
+          "description": "Titre du graphique"
+        },
+        {
+          "nom": "plt.legend()",
+          "description": "Affiche la légende"
+        },
+        {
+          "nom": "plt.grid()",
+          "description": "Affiche la grille"
+        },
+        {
+          "nom": "plt.suptitle('texte')",
+          "description": "Titre global de la figure"
+        }
+      ],
+      "subplots": {
+        "description": "La fonction subplot() permet d'organiser différents tracés dans une grille",
+        "syntaxe": "plt.subplot(nrows, ncols, index)",
+        "parametres": [
+          {
+            "nom": "nrows",
+            "description": "Nombre de lignes dans la grille"
+          },
+          {
+            "nom": "ncols",
+            "description": "Nombre de colonnes dans la grille"
+          },
+          {
+            "nom": "index",
+            "description": "Position du graphique, commence à 1 en haut à gauche"
+          }
+        ]
+      },
+      "types_graphiques": [
+        {
+          "nom": "plot()",
+          "description": "Courbes 2D"
+        },
+        {
+          "nom": "scatter()",
+          "description": "Nuage de points"
+        },
+        {
+          "nom": "bar()",
+          "description": "Diagramme en barres"
+        },
+        {
+          "nom": "hist()",
+          "description": "Histogramme"
+        }
+      ],
+      "exemples": [
+        {
+          "description": "Graphique linéaire simple",
+          "code": "xpoints = np.array([0, 6])\nypoints = np.array([0, 250])\nplt.plot(xpoints, ypoints)\nplt.show()"
+        },
+        {
+          "description": "Courbe avec style (vert, cercles, pointillés)",
+          "code": "x = np.linspace(0, 20, 20)\ny = x ** 2\nplt.plot(x, y, 'go:')\nplt.show()"
+        },
+        {
+          "description": "Deux fonctions sur le même graphique",
+          "code": "plt.plot(x, y1, 'g', label='fonction x²')\nplt.plot(x, y2, 'r', label='fonction 2x')\nplt.xlabel('axe x')\nplt.ylabel('axe y')\nplt.title('...')\nplt.legend()\nplt.grid()\nplt.show()"
+        },
+        {
+          "description": "Nuage de points aléatoires",
+          "code": "x = np.random.rand(100)\ny = np.random.rand(100)\nplt.scatter(x, y)\nplt.show()"
+        },
+        {
+          "description": "Sin et Cos",
+          "code": "x = np.linspace(0, 2*np.pi, 100)\ny1 = np.sin(x)\ny2 = np.cos(x)\nplt.plot(x, y1, label='Sin(x)', color='blue')\nplt.plot(x, y2, label='Cos(x)', color='red', linestyle='--')\nplt.legend()\nplt.show()"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+/* =============================================
+   CODE BLOCKS — Syntax highlighting + UI
+   ============================================= */
+
+.code-block-wrapper {
+    background: var(--bg-code);
+    border-radius: var(--radius-lg);
+    margin: var(--space-4) 0;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.code-block-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-2) var(--space-4);
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.code-block-lang {
+    font-size: var(--text-xs);
+    color: var(--gray-400);
+    font-weight: var(--weight-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.code-block-actions {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.code-copy-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+    color: var(--gray-400);
+    font-size: var(--text-xs);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-family: var(--font-family);
+}
+
+.code-copy-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--gray-200);
+}
+
+.code-copy-btn.copied {
+    color: var(--success-400);
+    border-color: var(--success-400);
+}
+
+.code-block-body {
+    padding: var(--space-4) var(--space-5);
+    overflow-x: auto;
+}
+
+.code-block-body::-webkit-scrollbar {
+    height: 4px;
+}
+
+.code-block-body::-webkit-scrollbar-thumb {
+    background: var(--gray-600);
+    border-radius: 2px;
+}
+
+.code-block-body pre {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    line-height: 1.7;
+    color: var(--text-code);
+    white-space: pre;
+}
+
+.code-block-body code {
+    font-family: inherit;
+}
+
+/* Line numbers */
+.code-line {
+    display: flex;
+    gap: var(--space-4);
+}
+
+.code-line-num {
+    color: var(--gray-600);
+    user-select: none;
+    min-width: 24px;
+    text-align: right;
+    font-size: var(--text-xs);
+    line-height: 1.7;
+    padding-top: 1px;
+}
+
+.code-line-content {
+    flex: 1;
+}
+
+/* Active line (step-by-step execution) */
+.code-line.active {
+    background: rgba(59, 130, 246, 0.12);
+    border-radius: var(--radius-sm);
+    margin: 0 calc(var(--space-4) * -1);
+    padding: 0 var(--space-4);
+}
+
+/* ── Output Block ── */
+.code-output {
+    background: var(--bg-code-output);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: var(--space-3) var(--space-5);
+}
+
+.code-output-label {
+    font-size: var(--text-xs);
+    color: var(--success-400);
+    font-weight: var(--weight-semibold);
+    margin-bottom: var(--space-2);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.code-output pre {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--success-400);
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+/* ── Step-by-step execution ── */
+.step-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-5);
+    background: rgba(255, 255, 255, 0.03);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.step-explanation {
+    padding: var(--space-3) var(--space-5);
+    background: rgba(59, 130, 246, 0.08);
+    color: var(--primary-300);
+    font-size: var(--text-sm);
+    border-top: 1px solid rgba(59, 130, 246, 0.15);
+    line-height: var(--leading-relaxed);
+}
+
+/* ── Syntax Colors ── */
+.token-keyword {
+    color: #c678dd;
+}
+
+.token-string {
+    color: #98c379;
+}
+
+.token-number {
+    color: #d19a66;
+}
+
+.token-comment {
+    color: #5c6370;
+    font-style: italic;
+}
+
+.token-function {
+    color: #61afef;
+}
+
+.token-builtin {
+    color: #e5c07b;
+}
+
+.token-operator {
+    color: #56b6c2;
+}
+
+.token-punctuation {
+    color: #abb2bf;
+}
+
+.token-variable {
+    color: #e06c75;
+}
+
+.token-class {
+    color: #e5c07b;
+}
+
+.token-decorator {
+    color: #c678dd;
+}
+
+.token-boolean {
+    color: #d19a66;
+}
+
+/* ── Inline code ── */
+code.inline {
+    background: var(--gray-100);
+    color: var(--primary-600);
+    padding: 0.15em 0.45em;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    font-weight: var(--weight-medium);
+}
+
+[data-theme="dark"] code.inline {
+    background: var(--gray-700);
+    color: var(--primary-300);
+}

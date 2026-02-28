@@ -1,0 +1,556 @@
+{
+    "cours": {
+        "titre": "Intelligence Artificielle",
+        "institution": "Université Mohammed V - EST Salé",
+        "filiere": "MI-GEII 2ème année",
+        "professeur": "Halima HOUSNY",
+        "parties": [
+            {
+                "id": 1,
+                "titre": "Introduction au Machine Learning",
+                "contenu": {
+                    "definition": "L'apprentissage automatique (Machine Learning) vise à donner aux machines la capacité d'apprendre à partir de données, en s'appuyant sur des algorithmes.",
+                    "types_de_donnees": [
+                        "mots",
+                        "chiffres",
+                        "statistiques",
+                        "images"
+                    ],
+                    "lien_avec_IA": "C'est un champ d'études de l'Intelligence Artificielle qui simule l'apprentissage, une forme d'intelligence humaine.",
+                    "etapes_developpement": [
+                        {
+                            "etape": 1,
+                            "nom": "Sélection des données d'entraînement",
+                            "description": "Préparer un ensemble de données étiquetées (résultat prédéfini) ou non étiquetées (le modèle extrait les caractéristiques lui-même)."
+                        },
+                        {
+                            "etape": 2,
+                            "nom": "Sélection de l'algorithme",
+                            "description": "Le choix dépend du type et volume de données et de la nature du problème."
+                        },
+                        {
+                            "etape": 3,
+                            "nom": "Entraînement de l'algorithme",
+                            "description": "Exécuter l'algorithme, comparer les résultats et ajuster jusqu'à obtenir le bon résultat."
+                        },
+                        {
+                            "etape": 4,
+                            "nom": "Utilisation et amélioration du modèle",
+                            "description": "Déployer le modèle sur un nouveau jeu de données lié au problème à résoudre."
+                        }
+                    ],
+                    "types_apprentissage": [
+                        {
+                            "type": "Apprentissage supervisé",
+                            "description": "Les algorithmes apprennent grâce à un jeu de données étiquetées avec un résultat prédéfini."
+                        },
+                        {
+                            "type": "Apprentissage non supervisé",
+                            "description": "Formation de base avec des données non étiquetées et sans résultat associé."
+                        },
+                        {
+                            "type": "Apprentissage par renforcement",
+                            "description": "Les algorithmes apprennent par essais, erreurs et récompenses (Trial and error)."
+                        }
+                    ]
+                }
+            },
+            {
+                "id": 2,
+                "titre": "Algorithmes de l'Apprentissage Supervisé",
+                "sous_parties": [
+                    {
+                        "titre": "Introduction",
+                        "contenu": {
+                            "principe": "Apprend la relation entre les caractéristiques et la cible à partir de l'ensemble de données.",
+                            "types": [
+                                "Classification",
+                                "Régression"
+                            ],
+                            "distinction": {
+                                "regression": "Prédit une valeur continue (quantité).",
+                                "classification": "Prédit une classe ou catégorie."
+                            }
+                        }
+                    },
+                    {
+                        "titre": "La Classification",
+                        "contenu": {
+                            "definition": "Type d'apprentissage supervisé qui prédit un résultat discret (Vrai/Faux, Oui/Non, 0/1).",
+                            "exemple": {
+                                "contexte": "Prédire si un client bancaire sera en défaut de paiement.",
+                                "caracteristiques": "historique de crédit, prêts, investissements",
+                                "cible": "0 ou 1 (défaut ou non)"
+                            },
+                            "algorithmes": [
+                                "Régression logistique",
+                                "Arbre de décision",
+                                "K plus proches voisins (KNN)",
+                                "Forêt aléatoire",
+                                "Réseaux neuronaux"
+                            ],
+                            "applications": [
+                                {
+                                    "application": "Classification des e-mails de spam",
+                                    "type": "Classification"
+                                },
+                                {
+                                    "application": "Détection de fraudes",
+                                    "type": "Classification"
+                                },
+                                {
+                                    "application": "Reconnaissance et classification d'images",
+                                    "type": "Classification"
+                                },
+                                {
+                                    "application": "Analyse de sentiments",
+                                    "type": "Classification"
+                                },
+                                {
+                                    "application": "Conversion de la langue parlée en texte",
+                                    "type": "Classification"
+                                },
+                                {
+                                    "application": "Diagnostic médical",
+                                    "type": "Classification"
+                                },
+                                {
+                                    "application": "Prévision des ventes",
+                                    "type": "Régression"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "titre": "La Régression",
+                        "contenu": {
+                            "definition": "Prédit des valeurs continues telles que ventes, salaire, poids ou température.",
+                            "exemples_application": [
+                                "Identifier les facteurs influençant la rentabilité d'un investissement",
+                                "Prévoir les ventes futures en analysant les ventes passées",
+                                "Anticiper le comportement des consommateurs",
+                                "Prédire le prix d'une maison en fonction de ses caractéristiques"
+                            ]
+                        }
+                    },
+                    {
+                        "titre": "Régression Linéaire",
+                        "contenu": {
+                            "objectif": "Créer un modèle décrivant la relation entre une variable dépendante et une ou plusieurs variables indépendantes.",
+                            "types": {
+                                "simple": "Une seule variable indépendante → une variable dépendante.",
+                                "multiple": "Plusieurs variables indépendantes → une variable dépendante."
+                            },
+                            "equation": "y = c + mx",
+                            "parametres": {
+                                "c": "Point d'intersection avec l'axe des ordonnées (y)",
+                                "m": "Pente de la droite"
+                            },
+                            "methode": "Méthode des moindres carrés",
+                            "formule_pente": "m = Σ(x - x̄)(y - ȳ) / Σ(x - x̄)²",
+                            "fonctions_evaluation": [
+                                {
+                                    "nom": "MSE (Mean Squared Error)",
+                                    "formule": "MSE = (1/N) * Σ(yᵢ - ŷ)²",
+                                    "interpretation": "Une valeur plus faible indique une meilleure performance prédictive."
+                                },
+                                {
+                                    "nom": "R² (Coefficient de détermination)",
+                                    "formule": "R² = Σ(y_pred - ȳ)² / Σ(y - ȳ)²",
+                                    "interpretation": "Plus R² est élevé, plus la distance entre les points réels et la droite diminue, meilleure est la performance."
+                                }
+                            ],
+                            "exemples": [
+                                {
+                                    "nom": "Exemple 1",
+                                    "donnees": [
+                                        {
+                                            "x": 1,
+                                            "y": 3
+                                        },
+                                        {
+                                            "x": 2,
+                                            "y": 4
+                                        },
+                                        {
+                                            "x": 3,
+                                            "y": 2
+                                        },
+                                        {
+                                            "x": 4,
+                                            "y": 4
+                                        },
+                                        {
+                                            "x": 5,
+                                            "y": 5
+                                        }
+                                    ],
+                                    "resultats": {
+                                        "moyenne_x": 3,
+                                        "moyenne_y": 3.6,
+                                        "m": 0.4,
+                                        "c": 2.4,
+                                        "equation": "y = 2.4 + 0.4x",
+                                        "MSE": 0.72,
+                                        "R2": 0.3
+                                    }
+                                },
+                                {
+                                    "nom": "Exemple 2 - Prédiction prix maison",
+                                    "donnees": [
+                                        {
+                                            "surface_m2": 80,
+                                            "prix_vente_eur": 350000
+                                        },
+                                        {
+                                            "surface_m2": 100,
+                                            "prix_vente_eur": 450000
+                                        },
+                                        {
+                                            "surface_m2": 60,
+                                            "prix_vente_eur": 200000
+                                        },
+                                        {
+                                            "surface_m2": 120,
+                                            "prix_vente_eur": 550000
+                                        },
+                                        {
+                                            "surface_m2": 75,
+                                            "prix_vente_eur": 250000
+                                        }
+                                    ],
+                                    "resultats": {
+                                        "moyenne_x": 87,
+                                        "moyenne_y": 360000,
+                                        "m": 6032.11,
+                                        "c": -164793.58,
+                                        "equation": "y = -164793.58 + 6032.11x",
+                                        "MSE": 535550458.72,
+                                        "R2": 0.97
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "titre": "K Plus Proches Voisins (KNN)",
+                        "contenu": {
+                            "definition": "Algorithme de ML supervisé simple, non paramétrique, qui mémorise les observations pour classifier les données de test.",
+                            "principe": "Trouver les k échantillons les plus proches du point de test et prédire sa classe selon la majorité.",
+                            "etapes": [
+                                "Sélectionner le nombre K de voisins",
+                                "Calculer la distance du point non classifié aux autres points",
+                                "Prendre les K voisins les plus proches",
+                                "Compter le nombre de points par catégorie parmi ces K voisins",
+                                "Attribuer la catégorie la plus présente"
+                            ],
+                            "formules_distance": {
+                                "euclidienne": "d = √(Σ(xᵢ - yᵢ)²)",
+                                "manhattan": "d = Σ|xᵢ - yᵢ|"
+                            },
+                            "choix_k": "Un k trop petit → surapprentissage. Un k trop grand → sous-apprentissage.",
+                            "exemples": [
+                                {
+                                    "nom": "Exemple 1 - Classification de points",
+                                    "donnees_apprentissage": [
+                                        {
+                                            "x": 2,
+                                            "y": 4,
+                                            "classe": "A"
+                                        },
+                                        {
+                                            "x": 4,
+                                            "y": 2,
+                                            "classe": "A"
+                                        },
+                                        {
+                                            "x": 4,
+                                            "y": 4,
+                                            "classe": "B"
+                                        },
+                                        {
+                                            "x": 4,
+                                            "y": 6,
+                                            "classe": "B"
+                                        },
+                                        {
+                                            "x": 6,
+                                            "y": 4,
+                                            "classe": "B"
+                                        }
+                                    ],
+                                    "echantillon_test": {
+                                        "x": 5,
+                                        "y": 5
+                                    },
+                                    "k": 3,
+                                    "distances": [
+                                        {
+                                            "point": [
+                                                2,
+                                                4
+                                            ],
+                                            "classe": "A",
+                                            "distance": 3.1622
+                                        },
+                                        {
+                                            "point": [
+                                                4,
+                                                2
+                                            ],
+                                            "classe": "A",
+                                            "distance": 3.1622
+                                        },
+                                        {
+                                            "point": [
+                                                4,
+                                                4
+                                            ],
+                                            "classe": "B",
+                                            "distance": 1.4142
+                                        },
+                                        {
+                                            "point": [
+                                                4,
+                                                6
+                                            ],
+                                            "classe": "B",
+                                            "distance": 1.4142
+                                        },
+                                        {
+                                            "point": [
+                                                6,
+                                                4
+                                            ],
+                                            "classe": "B",
+                                            "distance": 1.4142
+                                        }
+                                    ],
+                                    "prediction": "B"
+                                },
+                                {
+                                    "nom": "Exemple 2 - Détection Spam",
+                                    "donnees_apprentissage": [
+                                        {
+                                            "mots_suspects": 1,
+                                            "longueur": 120,
+                                            "spam": 0
+                                        },
+                                        {
+                                            "mots_suspects": 2,
+                                            "longueur": 150,
+                                            "spam": 0
+                                        },
+                                        {
+                                            "mots_suspects": 8,
+                                            "longueur": 90,
+                                            "spam": 1
+                                        },
+                                        {
+                                            "mots_suspects": 6,
+                                            "longueur": 100,
+                                            "spam": 1
+                                        },
+                                        {
+                                            "mots_suspects": 1,
+                                            "longueur": 200,
+                                            "spam": 0
+                                        },
+                                        {
+                                            "mots_suspects": 9,
+                                            "longueur": 80,
+                                            "spam": 1
+                                        },
+                                        {
+                                            "mots_suspects": 2,
+                                            "longueur": 180,
+                                            "spam": 0
+                                        },
+                                        {
+                                            "mots_suspects": 7,
+                                            "longueur": 95,
+                                            "spam": 1
+                                        }
+                                    ],
+                                    "echantillon_test": {
+                                        "mots_suspects": 4,
+                                        "longueur": 110
+                                    },
+                                    "k": 5,
+                                    "prediction": 1,
+                                    "interpretation": "SPAM"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "id": 3,
+                "titre": "Algorithmes de l'Apprentissage Non Supervisé",
+                "sous_parties": [
+                    {
+                        "titre": "Introduction",
+                        "contenu": {
+                            "definition": "Identifie des clusters ou groupes en fonction de données non étiquetées, avec très peu d'intervention humaine.",
+                            "categorie_principale": "Clustering"
+                        }
+                    },
+                    {
+                        "titre": "Clustering",
+                        "contenu": {
+                            "principe": "Regrouper les données en clusters homogènes ayant des caractéristiques communes.",
+                            "definition_formelle": "Organiser des objets de sorte que ceux d'un même groupe soient plus semblables entre eux qu'avec ceux des autres groupes.",
+                            "applications": [
+                                "Reconnaissance des formes",
+                                "Analyse d'images",
+                                "Analyse de la clientèle",
+                                "Analyse des réseaux sociaux"
+                            ],
+                            "algorithme_principal": "K-moyennes (K-means)"
+                        }
+                    },
+                    {
+                        "titre": "K-Means",
+                        "contenu": {
+                            "definition": "Divise des points en k groupes (clusters) homogènes et compacts.",
+                            "formule_distance": "d(p,q) = √(Σ(pᵢ - qᵢ)²)",
+                            "etapes": [
+                                "Choisir le nombre de clusters K",
+                                "Initialiser K centroïdes aléatoirement",
+                                "Calculer la distance euclidienne de chaque point vers chaque centroïde",
+                                "Affecter chaque point au centroïde le plus proche",
+                                "Recalculer les centroïdes comme la moyenne des points du cluster",
+                                "Répéter jusqu'à convergence (centroïdes stables) ou nombre max d'itérations atteint"
+                            ],
+                            "critere_arret": "Les centroïdes ne changent plus (convergence) ou le nombre maximal d'itérations est atteint.",
+                            "exemple": {
+                                "description": "Clustering d'étudiants par âge et poids",
+                                "k": 3,
+                                "implementation_sklearn": "kmeans = KMeans(n_clusters=3, n_init=10); kmeans.fit(data)"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "id": 4,
+                "titre": "Algorithmes de l'Apprentissage par Renforcement",
+                "sous_parties": [
+                    {
+                        "titre": "Introduction",
+                        "contenu": {
+                            "definition": "Méthode d'apprentissage pour la prise de décision. L'agent optimise sa politique d'action π grâce à des récompenses positives et négatives.",
+                            "principe": {
+                                "environnement_etat": "L'environnement est dans un état st.",
+                                "action": "L'agent effectue une action at.",
+                                "transition": "L'état devient st+1 et une récompense rt est reçue.",
+                                "fonction_transition": "Établit le passage de st à st+1 sous l'effet de at."
+                            },
+                            "elements_fondamentaux": {
+                                "agent": "Entité qui apprend et prend des décisions.",
+                                "environnement": "Monde dans lequel l'agent évolue.",
+                                "etat_s": "Situation actuelle de l'agent.",
+                                "action_a": "Choix possible dans un état donné.",
+                                "recompense_r": "Retour immédiat reçu après une action."
+                            }
+                        }
+                    },
+                    {
+                        "titre": "Q-Learning",
+                        "contenu": {
+                            "definition": "Permet à un agent d'apprendre la meilleure action dans chaque état, sans connaître le modèle de l'environnement.",
+                            "contrainte": "S'applique uniquement si le nombre d'états n et d'actions m sont finis et de taille raisonnable.",
+                            "q_table": {
+                                "description": "Tableau de valeurs. Lignes = états s, Colonnes = actions a. Q(s,a) = récompense totale (gain) espérée.",
+                                "politique": "a = π(s) = argmax Q[s,:] — l'agent choisit l'action avec la meilleure valeur Q."
+                            },
+                            "formule_mise_a_jour": "Q[s,a] = Q[s,a] + α * [r + γ * max_a' Q(s',a') - Q[s,a]]",
+                            "parametres": {
+                                "alpha": "Vitesse d'apprentissage (0 à 1).",
+                                "gamma": "Facteur d'actualisation (0 à 1).",
+                                "epsilon": "Paramètre équilibre exploration/exploitation."
+                            },
+                            "exploration_vs_exploitation": {
+                                "exploitation": "Utiliser la Q-table pour choisir l'action maximale.",
+                                "exploration": "Agir de façon aléatoire.",
+                                "epsilon_valeurs": {
+                                    "0.2": "20% du temps l'agent explore",
+                                    "0.0": "exploitation pure",
+                                    "1.0": "exploration pure"
+                                }
+                            },
+                            "algorithme_pseudocode": [
+                                "Initialiser Q[s,a]",
+                                "Répéter N épisodes:",
+                                "  Initialiser l'état s",
+                                "  Répéter:",
+                                "    Choisir action a depuis s (Q + aléatoire)",
+                                "    Observer récompense r et état s'",
+                                "    Mettre à jour Q[s,a] = Q[s,a] + α[r + γ*max_a'Q(s',a') - Q(s,a)]",
+                                "    s := s'",
+                                "  Jusqu'à nombre max de boucles"
+                            ],
+                            "exemple": {
+                                "grille": "4×4",
+                                "depart": [
+                                    0,
+                                    0
+                                ],
+                                "objectif": [
+                                    3,
+                                    3
+                                ],
+                                "case_interdite": [
+                                    1,
+                                    1
+                                ],
+                                "actions": {
+                                    "0": "haut",
+                                    "1": "bas",
+                                    "2": "gauche",
+                                    "3": "droite"
+                                },
+                                "recompenses": {
+                                    "objectif": 10,
+                                    "deplacement": -1,
+                                    "case_interdite": -10
+                                },
+                                "chemin_optimal": [
+                                    [
+                                        0,
+                                        0
+                                    ],
+                                    [
+                                        0,
+                                        1
+                                    ],
+                                    [
+                                        0,
+                                        2
+                                    ],
+                                    [
+                                        1,
+                                        2
+                                    ],
+                                    [
+                                        1,
+                                        3
+                                    ],
+                                    [
+                                        2,
+                                        3
+                                    ],
+                                    [
+                                        3,
+                                        3
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
