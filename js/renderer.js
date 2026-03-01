@@ -1,5 +1,16 @@
 /* ── Renderer — Master content renderer consuming content.json ── */
 const Renderer = {
+    /* SVG icon helper — inline Lucide-style icons */
+    _svg: {
+        document: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+        wrench: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+        cog: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
+        search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+        chart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
+        target: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
+        ruler: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3H7a4 4 0 0 0-4 4v10a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4Z"/><path d="M3 12h4"/><path d="M3 8h2"/><path d="M3 16h2"/><path d="M17 12h4"/></svg>',
+    },
+
     render(moduleId) {
         const module = ContentLoader.getModule(moduleId);
         if (!module) return;
@@ -58,19 +69,18 @@ const Renderer = {
         );
 
         // Libraries
-        html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-4)">📚 Les bibliothèques principales</h2>`;
+        html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-4)">Les bibliothèques principales</h2>`;
         html += `<p style="color:var(--text-secondary);margin-bottom:var(--space-4);font-size:var(--text-sm)">
       Une <strong>bibliothèque</strong> (= library), c'est un ensemble d'outils prêts à l'emploi. On les importe dans notre code pour ne pas tout réécrire.
     </p>`;
 
         html += `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--space-4)" class="stagger-children">`;
-        const libIcons = { numpy: '🔢', pandas: '🐼', matplotlib: '📊', scipy: '🔬' };
         const libColors = { numpy: 'var(--primary-500)', pandas: 'var(--success-500)', matplotlib: 'var(--warning-500)', scipy: 'var(--accent-500)' };
         m.bibliotheques.forEach(lib => {
             html += `
         <div class="concept-card expanded scroll-reveal" style="padding:var(--space-5)">
           <div style="display:flex;align-items:center;gap:var(--space-3);margin-bottom:var(--space-3)">
-            <div class="concept-card-icon" style="background:${libColors[lib.nom]}15;color:${libColors[lib.nom]};width:40px;height:40px">${libIcons[lib.nom] || '📦'}</div>
+            <div class="concept-card-icon" style="background:${libColors[lib.nom]}15;color:${libColors[lib.nom]};width:40px;height:40px">${this._svg.document}</div>
             <strong style="font-size:var(--text-lg)">${lib.nom}</strong>
           </div>
           <p style="font-size:var(--text-sm);color:var(--text-secondary)">${lib.description}</p>
@@ -79,7 +89,7 @@ const Renderer = {
         });
         html += `</div>`;
 
-        html += ConceptCard.encourage("C'est parti ! Dans les prochains modules, on va apprendre à utiliser ces outils un par un. 🚀");
+        html += ConceptCard.encourage("C'est parti ! Dans les prochains modules, on va apprendre à utiliser ces outils un par un.");
         html += QuizEngine.renderInline('introduction', 0);
         html += ConceptCard.completeButton('introduction', 0);
         return html;
@@ -99,12 +109,12 @@ const Renderer = {
 
         // Concepts
         html += `<div id="section-0">`;
-        html += `<h2 style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-6) 0 var(--space-3)">📝 Points clés</h2>`;
+        html += `<h2 style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-6) 0 var(--space-3)">Points clés</h2>`;
         html += ConceptCard.steps(m.concepts);
         html += `</div>`;
 
         // Import syntaxes
-        html += `<h2 style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">🔧 Les différentes façons d'importer</h2>`;
+        html += `<h2 style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">Les différentes façons d'importer</h2>`;
         html += `<p style="color:var(--text-secondary);margin-bottom:var(--space-4);font-size:var(--text-sm)">
       Il y a plusieurs façons d'importer un module. Voici les plus utilisées :
     </p>`;
@@ -115,11 +125,11 @@ const Renderer = {
         <p style="color:var(--text-secondary);margin-bottom:var(--space-3)">${s.usage}</p>
         ${CodeBlock.create(s.exemple, s.acces, { explanation: `Syntaxe : ${s.syntaxe}` })}
       `;
-            html += ConceptCard.create(s.syntaxe, '📦', body, { expanded: i === 0 });
+            html += ConceptCard.create(s.syntaxe, this._svg.document, body, { expanded: i === 0 });
         });
 
         html += QuizEngine.renderAll('modules_python');
-        html += ConceptCard.encourage("Vous maîtrisez maintenant les imports ! C'est la base de tout ce qu'on va faire ensuite. 💪");
+        html += ConceptCard.encourage("Vous maîtrisez maintenant les imports ! C'est la base de tout ce qu'on va faire ensuite.");
         html += ConceptCard.completeButton('modules_python', 0);
         return html;
     },
@@ -157,7 +167,7 @@ const Renderer = {
         let html = '';
 
         if (section.titre === 'Création de tableaux (array)') {
-            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">📦 ${section.titre}</h2>`;
+            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">${section.titre}</h2>`;
             html += ConceptCard.definition(
                 "Un <strong>array</strong> (tableau), c'est une collection ordonnée de données du <strong>même type</strong>. " +
                 "C'est comme une rangée de boîtes numérotées, où chaque boîte contient le même type d'objet."
@@ -170,12 +180,12 @@ const Renderer = {
 
             // Examples one by one
             if (section.exemples) {
-                html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">💻 Exemples</h3>`;
+                html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Exemples</h3>`;
                 section.exemples.forEach((ex, i) => {
                     const explanations = [
                         "On transforme une liste Python en array NumPy",
                         "On peut aussi partir d'un tuple",
-                        "⚠️ Si on mélange nombres et texte, tout devient du texte !",
+                        "Si on mélange nombres et texte, tout devient du texte !",
                         "Si on mélange int et float, tout devient float",
                         "True est converti en 1, False en 0",
                         "True est converti en 1.0 quand mélangé avec des floats"
@@ -189,7 +199,7 @@ const Renderer = {
             html += ConceptCard.completeButton(moduleId, idx);
 
         } else if (section.titre === 'Fonction arange()') {
-            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">🔄 ${section.titre}</h2>`;
+            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">${section.titre}</h2>`;
             html += ConceptCard.definition("La fonction <code class='inline'>arange()</code> crée un array avec des nombres qui se suivent, comme la fonction <code class='inline'>range()</code> mais pour NumPy.");
             html += ConceptCard.steps(section.contenu);
             if (section.exemples) {
@@ -200,7 +210,7 @@ const Renderer = {
             html += ConceptCard.completeButton(moduleId, idx);
 
         } else if (section.titre === 'Tableaux à double dimensions') {
-            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">📐 ${section.titre}</h2>`;
+            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">${section.titre}</h2>`;
             html += ConceptCard.definition("Un tableau <strong>2D</strong>, c'est un tableau de tableaux — comme un tableur avec des lignes et des colonnes.");
             html += Diagrams.arrayMemory2D();
             html += ConceptCard.steps(section.contenu);
@@ -213,7 +223,7 @@ const Renderer = {
             html += ConceptCard.completeButton(moduleId, idx);
 
         } else if (section.titre === 'Opérations sur les tableaux') {
-            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">⚡ ${section.titre}</h2>`;
+            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">${section.titre}</h2>`;
             html += ConceptCard.definition("Avec NumPy, on peut faire des calculs sur <strong>tous les éléments</strong> d'un array en une seule opération. C'est le <strong>calcul vectoriel</strong>.");
             html += ConceptCard.why("Au lieu de faire une boucle pour additionner 1 à chaque élément, NumPy le fait automatiquement — et c'est 100x plus rapide !");
             html += ConceptCard.steps(section.contenu);
@@ -227,7 +237,7 @@ const Renderer = {
             html += ConceptCard.completeButton(moduleId, idx);
 
         } else if (section.titre === 'Attributs des tableaux') {
-            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">📏 ${section.titre}</h2>`;
+            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">${section.titre}</h2>`;
             html += ConceptCard.definition("Chaque array a des <strong>propriétés</strong> qui nous renseignent sur sa forme et sa taille.");
             if (section.attributs) {
                 html += `<div style="margin:var(--space-4) 0"><table class="comparison-table">
@@ -245,7 +255,7 @@ const Renderer = {
             html += ConceptCard.completeButton(moduleId, idx);
 
         } else if (section.titre === 'Méthodes appliquées sur des tableaux') {
-            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">🧮 ${section.titre}</h2>`;
+            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">${section.titre}</h2>`;
             html += ConceptCard.definition("NumPy offre des fonctions pour calculer rapidement des statistiques sur vos données.");
             if (section.methodes) {
                 html += `<div style="margin:var(--space-4) 0"><table class="comparison-table">
@@ -259,18 +269,18 @@ const Renderer = {
             html += ConceptCard.completeButton(moduleId, idx);
 
         } else if (section.titre === 'Fonctions couramment utilisées') {
-            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">🛠️ ${section.titre}</h2>`;
+            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">${section.titre}</h2>`;
             section.fonctions.forEach(fn => {
                 let body = `<p style="color:var(--text-secondary);margin-bottom:var(--space-3)">${fn.description}</p>`;
                 if (fn.exemples) {
                     fn.exemples.forEach(ex => { body += CodeBlock.create(ex.code, ex.resultat); });
                 }
-                html += ConceptCard.create(fn.nom.split('(')[0], '🔧', body);
+                html += ConceptCard.create(fn.nom.split('(')[0], this._svg.wrench, body);
             });
             html += ConceptCard.completeButton(moduleId, idx);
 
         } else if (section.titre === 'Application') {
-            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">🎯 ${section.titre} pratique</h2>`;
+            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">${section.titre} pratique</h2>`;
             html += ConceptCard.encourage(section.contexte + " — C'est exactement le genre de problème qu'on résout avec NumPy !");
             html += `<div id="grades-chart" style="margin:var(--space-6) 0;max-width:600px"></div>`;
             section.exercices.forEach(ex => {
@@ -281,7 +291,7 @@ const Renderer = {
             ${Object.entries(ex.resultats).map(([k, v]) => `<tr><td>${k}</td><td><strong>${v}</strong></td></tr>`).join('')}
           </table></div>`;
                 }
-                html += ConceptCard.create(`Exercice ${ex.num}`, '📝', body);
+                html += ConceptCard.create(`Exercice ${ex.num}`, this._svg.document, body);
             });
             html += ConceptCard.completeButton(moduleId, idx);
         }
@@ -307,11 +317,11 @@ const Renderer = {
         const series = m.structures_principales.find(s => s.nom === 'Series');
         if (series) {
             html += `<div id="section-0" style="margin-top:var(--space-8)">`;
-            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">📊 Les Series</h2>`;
+            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">Les Series</h2>`;
             html += ConceptCard.definition(`${series.description}. Pensez à une <strong>colonne unique</strong> d'un tableau Excel.`);
             html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Comment créer une Series ?</h3>`;
             series.creation.forEach(c => {
-                html += ConceptCard.create(c.methode, '📝', CodeBlock.create(c.code, ''));
+                html += ConceptCard.create(c.methode, this._svg.document, CodeBlock.create(c.code, ''));
             });
             if (series.acces) {
                 html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Accéder aux données</h3>`;
@@ -327,14 +337,14 @@ const Renderer = {
         const df = m.structures_principales.find(s => s.nom === 'DataFrame');
         if (df) {
             html += `<div id="section-1" style="margin-top:var(--space-8)">`;
-            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">📋 Les DataFrames</h2>`;
+            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">Les DataFrames</h2>`;
             html += ConceptCard.definition(`${df.description}. C'est la structure la plus utilisée en Pandas — pensez à une <strong>feuille Excel complète</strong>.`);
             html += Diagrams.dataframeSchema();
             html += Diagrams.seriesVsDataframe();
 
             html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Comment créer un DataFrame ?</h3>`;
             df.creation.forEach(c => {
-                html += ConceptCard.create(c.methode, '📝', CodeBlock.create(c.code, ''));
+                html += ConceptCard.create(c.methode, this._svg.document, CodeBlock.create(c.code, ''));
             });
 
             if (df.operations) {
@@ -342,7 +352,7 @@ const Renderer = {
                 df.operations.forEach(op => {
                     let body = CodeBlock.create(op.code, '');
                     if (op.note) body += ConceptCard.tip(op.note);
-                    html += ConceptCard.create(op.nom, '⚙️', body);
+                    html += ConceptCard.create(op.nom, this._svg.cog, body);
                 });
             }
 
@@ -353,14 +363,14 @@ const Renderer = {
                     let body = '';
                     if (ex.description) body += `<p style="color:var(--text-secondary);margin-bottom:var(--space-2)">${ex.description}</p>`;
                     body += CodeBlock.create(ex.code, ex.resultat || '');
-                    html += ConceptCard.create(ex.nom, '🔍', body);
+                    html += ConceptCard.create(ex.nom, this._svg.search, body);
                 });
             }
 
             if (df.filtrage) {
                 html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Filtrer et trier</h3>`;
                 df.filtrage.forEach(f => {
-                    html += ConceptCard.create(f.nom, '🔎', CodeBlock.create(f.code, ''));
+                    html += ConceptCard.create(f.nom, this._svg.search, CodeBlock.create(f.code, ''));
                 });
             }
 
@@ -394,12 +404,12 @@ const Renderer = {
         html += CodeBlock.create(m.import, null, { explanation: "On utilise le sous-module pyplot avec l'alias plt" });
 
         // Pipeline
-        html += `<h2 style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">🔄 Comment créer un graphique ?</h2>`;
+        html += `<h2 style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">Comment créer un graphique ?</h2>`;
         html += Diagrams.plottingPipeline();
         html += CodeBlock.create(m.syntaxe_base, null, { explanation: "La structure de base de tout graphique Matplotlib" });
 
         // Appearance
-        html += `<h2 id="section-0" style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">🎨 Personnaliser l'apparence</h2>`;
+        html += `<h2 id="section-0" style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">Personnaliser l'apparence</h2>`;
         html += `<p style="color:var(--text-secondary);margin-bottom:var(--space-4)">On peut changer la couleur, le style des points et des lignes avec un code court :</p>`;
 
         if (m.apparence) {
@@ -422,7 +432,7 @@ const Renderer = {
 
         // Functions
         if (m.fonctions_informations) {
-            html += `<h2 id="section-1" style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">📝 Ajouter des informations</h2>`;
+            html += `<h2 id="section-1" style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">Ajouter des informations</h2>`;
             html += `<div style="margin:var(--space-4) 0"><table class="comparison-table">
         <tr><th>Fonction</th><th>Ce qu'elle fait</th></tr>
         ${m.fonctions_informations.map(f => `<tr><td><code class="inline">${f.nom}</code></td><td>${f.description}</td></tr>`).join('')}
@@ -431,7 +441,7 @@ const Renderer = {
 
         // Subplots
         if (m.subplots) {
-            html += `<h2 id="section-2" style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">📐 Subplots — Plusieurs graphiques</h2>`;
+            html += `<h2 id="section-2" style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">Subplots — Plusieurs graphiques</h2>`;
             html += ConceptCard.definition(m.subplots.description);
             html += CodeBlock.create(m.subplots.syntaxe, null);
             html += `<div style="margin:var(--space-4) 0"><table class="comparison-table">
@@ -442,7 +452,7 @@ const Renderer = {
 
         // Chart types
         if (m.types_graphiques) {
-            html += `<h2 id="section-3" style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">📊 Types de graphiques</h2>`;
+            html += `<h2 id="section-3" style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">Types de graphiques</h2>`;
             html += `<div style="margin:var(--space-4) 0"><table class="comparison-table">
         <tr><th>Fonction</th><th>Type</th></tr>
         ${m.types_graphiques.map(t => `<tr><td><code class="inline">${t.nom}</code></td><td>${t.description}</td></tr>`).join('')}
@@ -450,7 +460,7 @@ const Renderer = {
         }
 
         // Demo charts
-        html += `<h2 style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">👁️ Aperçu interactif</h2>`;
+        html += `<h2 style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">Aperçu interactif</h2>`;
         html += `<p style="color:var(--text-secondary);margin-bottom:var(--space-4)">Voici ce que Matplotlib peut produire :</p>`;
         html += `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:var(--space-6)">
       <div class="concept-card expanded" style="padding:var(--space-4)"><div id="sincos-chart"></div></div>
@@ -459,14 +469,14 @@ const Renderer = {
 
         // Examples
         if (m.exemples) {
-            html += `<h2 style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">💻 Exemples de code</h2>`;
+            html += `<h2 style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">Exemples de code</h2>`;
             m.exemples.forEach(ex => {
-                html += ConceptCard.create(ex.description, '📈', CodeBlock.create(ex.code, ''));
+                html += ConceptCard.create(ex.description, this._svg.chart, CodeBlock.create(ex.code, ''));
             });
         }
 
         html += QuizEngine.renderAll('matplotlib');
-        html += ConceptCard.encourage("Bravo ! Vous avez terminé le module Matplotlib. Vous pouvez maintenant visualiser n'importe quelles données ! 🎉");
+        html += ConceptCard.encourage("Bravo ! Vous avez terminé le module Matplotlib. Vous pouvez maintenant visualiser n'importe quelles données !");
         html += ConceptCard.completeButton('matplotlib', 0);
 
         return html;
@@ -524,28 +534,27 @@ const Renderer = {
         );
 
         // Types de données
-        html += `<h2 style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">📊 Les données utilisées</h2>`;
+        html += `<h2 style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">Les données utilisées</h2>`;
         html += `<p style="color:var(--text-secondary);margin-bottom:var(--space-4)">Le ML peut apprendre à partir de différents types de données :</p>`;
         html += `<div style="display:flex;flex-wrap:wrap;gap:var(--space-3);margin-bottom:var(--space-6)">`;
-        const dataIcons = { mots: '📝', chiffres: '🔢', statistiques: '📈', images: '🖼️' };
         c.types_de_donnees.forEach(t => {
             html += `<div class="concept-card expanded scroll-reveal" style="padding:var(--space-4);flex:1;min-width:120px;text-align:center">
-                <span style="font-size:2rem">${dataIcons[t] || '📦'}</span>
+                <div class="concept-card-icon" style="width:40px;height:40px;margin:0 auto">${this._svg.document}</div>
                 <div style="font-weight:var(--weight-semibold);margin-top:var(--space-2)">${t.charAt(0).toUpperCase() + t.slice(1)}</div>
             </div>`;
         });
         html += `</div>`;
 
         // Étapes de développement
-        html += `<h2 style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-6) 0 var(--space-3)">🔄 Les 4 étapes d'un projet ML</h2>`;
+        html += `<h2 style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-6) 0 var(--space-3)">Les 4 étapes d'un projet ML</h2>`;
         html += Diagrams.mlPipeline(c.etapes_developpement);
         html += ConceptCard.steps(c.etapes_developpement.map(e => `<strong>${e.nom}</strong> — ${e.description}`));
 
         // Types d'apprentissage
-        html += `<h2 style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">🧠 Les 3 types d'apprentissage</h2>`;
+        html += `<h2 style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">Les 3 types d'apprentissage</h2>`;
         html += `<p style="color:var(--text-secondary);margin-bottom:var(--space-4)">Il y a 3 grandes familles de Machine Learning :</p>`;
 
-        const typeIcons = { 'Apprentissage supervisé': '🏷️', 'Apprentissage non supervisé': '🔍', 'Apprentissage par renforcement': '🎮' };
+        const typeIcons = {}; // removed emojis
         const typeColors = { 'Apprentissage supervisé': 'var(--primary-500)', 'Apprentissage non supervisé': 'var(--accent-500)', 'Apprentissage par renforcement': 'var(--error-500)' };
         const typeAnalogies = {
             'Apprentissage supervisé': 'Comme un prof qui corrige vos copies — il vous dit "oui" ou "non" pour chaque réponse.',
@@ -558,18 +567,18 @@ const Renderer = {
             html += `
                 <div class="concept-card expanded scroll-reveal" style="padding:var(--space-5);border-left:4px solid ${typeColors[t.type] || 'var(--primary-500)'}">
                     <div style="display:flex;align-items:center;gap:var(--space-3);margin-bottom:var(--space-3)">
-                        <span style="font-size:1.5rem">${typeIcons[t.type] || '📘'}</span>
+                        <div class="concept-card-icon" style="width:36px;height:36px">${this._svg.target}</div>
                         <strong style="font-size:var(--text-base)">${t.type}</strong>
                     </div>
                     <p style="font-size:var(--text-sm);color:var(--text-secondary);margin-bottom:var(--space-2)">${t.description}</p>
-                    <div class="info-box tip" style="margin:var(--space-2) 0 0"><span class="info-box-icon">🎯</span><div>${typeAnalogies[t.type]}</div></div>
+                    <div class="info-box tip" style="margin:var(--space-2) 0 0"><span class="info-box-icon">${ConceptCard._svgIcons.tip}</span><div>${typeAnalogies[t.type]}</div></div>
                 </div>
             `;
         });
         html += `</div>`;
 
         html += QuizEngine.renderAll('ml_part_1');
-        html += ConceptCard.encourage("Vous comprenez maintenant les bases du Machine Learning ! Dans les prochains modules, on va voir chaque type en détail. 🚀");
+        html += ConceptCard.encourage("Vous comprenez maintenant les bases du Machine Learning ! Dans les prochains modules, on va voir chaque type en détail.");
         html += ConceptCard.completeButton('ml_part_1', 0);
         return html;
     },
@@ -600,12 +609,12 @@ const Renderer = {
         const classification = subs.find(s => s.titre === 'La Classification');
         if (classification) {
             html += `<div id="section-1" style="margin-top:var(--space-8)">`;
-            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">🏷️ La Classification</h2>`;
+            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">La Classification</h2>`;
             html += ConceptCard.definition(classification.contenu.definition);
 
             if (classification.contenu.exemple) {
                 const ex = classification.contenu.exemple;
-                html += ConceptCard.create('Exemple concret', '🏦', `
+                html += ConceptCard.create('Exemple concret', this._svg.document, `
                     <p><strong>${ex.contexte}</strong></p>
                     <p style="color:var(--text-secondary);margin-top:var(--space-2)">Caractéristiques utilisées : ${ex.caracteristiques}</p>
                     <p style="color:var(--text-secondary)">Résultat prédit (cible) : <code class="inline">${ex.cible}</code></p>
@@ -635,7 +644,7 @@ const Renderer = {
         const regression = subs.find(s => s.titre === 'La Régression');
         if (regression) {
             html += `<div id="section-2" style="margin-top:var(--space-8)">`;
-            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">📈 La Régression</h2>`;
+            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">La Régression</h2>`;
             html += ConceptCard.definition(regression.contenu.definition);
 
             html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Exemples d'application</h3>`;
@@ -647,7 +656,7 @@ const Renderer = {
         const linReg = subs.find(s => s.titre === 'Régression Linéaire');
         if (linReg) {
             html += `<div id="section-3" style="margin-top:var(--space-8)">`;
-            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">📐 Régression Linéaire</h2>`;
+            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">Régression Linéaire</h2>`;
             html += ConceptCard.definition(linReg.contenu.objectif);
 
             // Simple explanation
@@ -664,7 +673,7 @@ const Renderer = {
 
             // Equation
             html += `<div class="info-box definition" style="margin:var(--space-4) 0">
-                <span class="info-box-icon">📐</span>
+                <span class="info-box-icon">${this._svg.ruler}</span>
                 <div>
                     <strong>Équation de la droite :</strong> <code class="inline">${linReg.contenu.equation}</code><br>
                     <span style="font-size:var(--text-sm);color:var(--text-secondary)">
@@ -677,19 +686,19 @@ const Renderer = {
             html += ConceptCard.tip(`La <strong>${linReg.contenu.methode}</strong> est utilisée pour trouver la meilleure droite. Formule de la pente : <code class="inline">${linReg.contenu.formule_pente}</code>`);
 
             // Fonctions d'évaluation
-            html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">📏 Évaluer la qualité du modèle</h3>`;
+            html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Évaluer la qualité du modèle</h3>`;
             html += `<div style="margin:var(--space-4) 0"><table class="comparison-table">
                 <tr><th>Métrique</th><th>Formule</th><th>Interprétation</th></tr>
                 ${linReg.contenu.fonctions_evaluation.map(f => `<tr><td><strong>${f.nom}</strong></td><td><code class="inline">${f.formule}</code></td><td>${f.interpretation}</td></tr>`).join('')}
             </table></div>`;
 
             // Interactive chart
-            html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">📊 Visualisation interactive</h3>`;
+            html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Visualisation interactive</h3>`;
             html += `<div id="lr-chart-1" class="concept-card expanded" style="padding:var(--space-4);max-width:600px"></div>`;
 
             // Exemples
             if (linReg.contenu.exemples) {
-                html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">✍️ Exemples corrigés</h3>`;
+                html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Exemples corrigés</h3>`;
                 linReg.contenu.exemples.forEach(ex => {
                     let body = `<div style="margin:var(--space-4) 0"><table class="comparison-table">
                         <tr><th>Paramètre</th><th>Valeur</th></tr>`;
@@ -697,18 +706,18 @@ const Renderer = {
                         body += `<tr><td>${k}</td><td><strong>${v}</strong></td></tr>`;
                     });
                     body += `</table></div>`;
-                    html += ConceptCard.create(ex.nom, '📝', body);
+                    html += ConceptCard.create(ex.nom, this._svg.document, body);
                 });
             }
 
             // 2 Méthodes Python
             if (linReg.contenu.methodes_python) {
-                html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">💻 Comment coder la Régression Linéaire ? (2 méthodes)</h3>`;
+                html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Comment coder la Régression Linéaire ? (2 méthodes)</h3>`;
                 html += `<p style="color:var(--text-secondary);margin-bottom:var(--space-4)">Voici 2 façons de faire — choisissez celle qui vous convient !</p>`;
                 linReg.contenu.methodes_python.forEach(method => {
                     let body = `<p style="color:var(--text-secondary);margin-bottom:var(--space-3)">${method.description}</p>`;
                     body += CodeBlock.create(method.code, method.resultat);
-                    html += ConceptCard.create(method.nom, '🛠️', body);
+                    html += ConceptCard.create(method.nom, this._svg.wrench, body);
                 });
             }
 
@@ -721,7 +730,7 @@ const Renderer = {
         const knn = subs.find(s => s.titre === 'K Plus Proches Voisins (KNN)');
         if (knn) {
             html += `<div id="section-4" style="margin-top:var(--space-8)">`;
-            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">🎯 K Plus Proches Voisins (KNN)</h2>`;
+            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">K Plus Proches Voisins (KNN)</h2>`;
             html += ConceptCard.definition(knn.contenu.definition);
 
             // Simple explanation
@@ -735,11 +744,11 @@ const Renderer = {
             }
 
             // Étapes
-            html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">📋 Les étapes de KNN</h3>`;
+            html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Les étapes de KNN</h3>`;
             html += ConceptCard.steps(knn.contenu.etapes);
 
             // Distances
-            html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">📏 Formules de distance</h3>`;
+            html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Formules de distance</h3>`;
             html += `<div style="margin:var(--space-4) 0"><table class="comparison-table">
                 <tr><th>Type</th><th>Formule</th></tr>
                 <tr><td>Euclidienne</td><td><code class="inline">${knn.contenu.formules_distance.euclidienne}</code></td></tr>
@@ -749,12 +758,12 @@ const Renderer = {
             html += ConceptCard.warning(knn.contenu.choix_k);
 
             // KNN interactive chart
-            html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">📊 Visualisation KNN</h3>`;
+            html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Visualisation KNN</h3>`;
             html += `<div id="knn-chart-1" class="concept-card expanded" style="padding:var(--space-4);max-width:600px"></div>`;
 
             // Exemples
             if (knn.contenu.exemples) {
-                html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">✍️ Exemples</h3>`;
+                html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Exemples</h3>`;
                 knn.contenu.exemples.forEach(ex => {
                     let body = `<p style="margin-bottom:var(--space-3)">${ex.nom}</p>`;
                     if (ex.distances) {
@@ -763,19 +772,19 @@ const Renderer = {
                             ${ex.distances.map(d => `<tr><td>(${d.point.join(', ')})</td><td><span class="badge ${d.classe === 'A' ? 'badge-primary' : 'badge-success'}">${d.classe}</span></td><td>${d.distance}</td></tr>`).join('')}
                         </table></div>`;
                     }
-                    body += `<div class="info-box encourage"><span class="info-box-icon">🎯</span><div>Prédiction : <strong>${ex.prediction}${ex.interpretation ? ' (' + ex.interpretation + ')' : ''}</strong></div></div>`;
-                    html += ConceptCard.create(ex.nom, '📊', body);
+                    body += `<div class="info-box encourage"><span class="info-box-icon">${ConceptCard._svgIcons.encourage}</span><div>Prédiction : <strong>${ex.prediction}${ex.interpretation ? ' (' + ex.interpretation + ')' : ''}</strong></div></div>`;
+                    html += ConceptCard.create(ex.nom, this._svg.chart, body);
                 });
             }
 
             // 2 Méthodes Python
             if (knn.contenu.methodes_python) {
-                html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">💻 Comment coder KNN ? (2 méthodes)</h3>`;
+                html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Comment coder KNN ? (2 méthodes)</h3>`;
                 html += `<p style="color:var(--text-secondary);margin-bottom:var(--space-4)">Voici 2 façons de faire — choisissez celle qui vous convient !</p>`;
                 knn.contenu.methodes_python.forEach(method => {
                     let body = `<p style="color:var(--text-secondary);margin-bottom:var(--space-3)">${method.description}</p>`;
                     body += CodeBlock.create(method.code, method.resultat);
-                    html += ConceptCard.create(method.nom, '🛠️', body);
+                    html += ConceptCard.create(method.nom, this._svg.wrench, body);
                 });
             }
 
@@ -804,7 +813,7 @@ const Renderer = {
         const clustering = subs.find(s => s.titre === 'Clustering');
         if (clustering) {
             html += `<div id="section-1" style="margin-top:var(--space-8)">`;
-            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">🔍 Le Clustering</h2>`;
+            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">Le Clustering</h2>`;
             html += ConceptCard.definition(clustering.contenu.definition_formelle || clustering.contenu.principe);
 
             html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Applications</h3>`;
@@ -817,7 +826,7 @@ const Renderer = {
         const kmeans = subs.find(s => s.titre === 'K-Means');
         if (kmeans) {
             html += `<div id="section-2" style="margin-top:var(--space-8)">`;
-            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">🎯 L'algorithme K-Means</h2>`;
+            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">L'algorithme K-Means</h2>`;
             html += ConceptCard.definition(kmeans.contenu.definition);
 
             // Simple explanation
@@ -832,29 +841,29 @@ const Renderer = {
 
             // Distance formula
             html += `<div class="info-box definition" style="margin:var(--space-4) 0">
-                <span class="info-box-icon">📐</span>
+                <span class="info-box-icon">${this._svg.ruler}</span>
                 <div><strong>Distance euclidienne :</strong> <code class="inline">${kmeans.contenu.formule_distance}</code></div>
             </div>`;
 
             // Étapes
-            html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">📋 Les étapes de K-Means</h3>`;
+            html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Les étapes de K-Means</h3>`;
             html += Diagrams.kMeansPipeline(kmeans.contenu.etapes);
             html += ConceptCard.steps(kmeans.contenu.etapes);
 
             html += ConceptCard.tip(kmeans.contenu.critere_arret);
 
             // Interactive chart
-            html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">📊 Visualisation K-Means</h3>`;
+            html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Visualisation K-Means</h3>`;
             html += `<div id="kmeans-chart" class="concept-card expanded" style="padding:var(--space-4);max-width:600px"></div>`;
 
             // 2 Méthodes Python
             if (kmeans.contenu.methodes_python) {
-                html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">💻 Comment coder K-Means ? (2 méthodes)</h3>`;
+                html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Comment coder K-Means ? (2 méthodes)</h3>`;
                 html += `<p style="color:var(--text-secondary);margin-bottom:var(--space-4)">Voici 2 façons de faire — choisissez celle qui vous convient !</p>`;
                 kmeans.contenu.methodes_python.forEach(method => {
                     let body = `<p style="color:var(--text-secondary);margin-bottom:var(--space-3)">${method.description}</p>`;
                     body += CodeBlock.create(method.code, method.resultat);
-                    html += ConceptCard.create(method.nom, '🛠️', body);
+                    html += ConceptCard.create(method.nom, this._svg.wrench, body);
                 });
             }
 
@@ -882,7 +891,7 @@ const Renderer = {
 
             html += `<div id="section-0" style="margin-top:var(--space-6)">`;
             // Elements fondamentaux
-            html += `<h2 style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-6) 0 var(--space-3)">🧩 Éléments fondamentaux</h2>`;
+            html += `<h2 style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-6) 0 var(--space-3)">Éléments fondamentaux</h2>`;
             html += Diagrams.rlCycle(intro.contenu.elements_fondamentaux);
 
             html += `<div style="margin:var(--space-4) 0"><table class="comparison-table">
@@ -897,7 +906,7 @@ const Renderer = {
         const qlearn = subs.find(s => s.titre === 'Q-Learning');
         if (qlearn) {
             html += `<div id="section-1" style="margin-top:var(--space-8)">`;
-            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">🧠 Q-Learning</h2>`;
+            html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">Q-Learning</h2>`;
             html += ConceptCard.definition(qlearn.contenu.definition);
 
             // Simple explanation
@@ -908,18 +917,18 @@ const Renderer = {
             html += ConceptCard.tip(qlearn.contenu.contrainte);
 
             // Q-Table
-            html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">📋 La Q-Table</h3>`;
-            html += ConceptCard.create('Qu\'est-ce que la Q-Table ?', '📋', `
+            html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">La Q-Table</h3>`;
+            html += ConceptCard.create('Qu\'est-ce que la Q-Table ?', this._svg.document, `
                 <p>${qlearn.contenu.q_table.description}</p>
                 <div class="info-box definition" style="margin-top:var(--space-3)">
-                    <span class="info-box-icon">📐</span>
+                    <span class="info-box-icon">${this._svg.ruler}</span>
                     <div><strong>Politique :</strong> <code class="inline">${qlearn.contenu.q_table.politique}</code></div>
                 </div>
             `, { expanded: true });
 
             // Formule de mise à jour
             html += `<div class="info-box definition" style="margin:var(--space-4) 0">
-                <span class="info-box-icon">📐</span>
+                <span class="info-box-icon">${this._svg.ruler}</span>
                 <div>
                     <strong>Formule de mise à jour :</strong><br>
                     <code class="inline" style="font-size:var(--text-sm)">${qlearn.contenu.formule_mise_a_jour}</code>
@@ -933,9 +942,9 @@ const Renderer = {
             </table></div>`;
 
             // Exploration vs Exploitation
-            html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">🔄 Exploration vs Exploitation</h3>`;
+            html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Exploration vs Exploitation</h3>`;
             html += `<div style="margin:var(--space-4) 0"><table class="comparison-table">
-                <tr><th></th><th>Exploitation 🏭</th><th>Exploration 🔭</th></tr>
+                <tr><th></th><th>Exploitation</th><th>Exploration</th></tr>
                 <tr><td>Principe</td><td>${qlearn.contenu.exploration_vs_exploitation.exploitation}</td><td>${qlearn.contenu.exploration_vs_exploitation.exploration}</td></tr>
                 <tr><td>ε = 0.0</td><td colspan="2">100% exploitation (toujours le meilleur choix connu)</td></tr>
                 <tr><td>ε = 1.0</td><td colspan="2">100% exploration (toujours aléatoire)</td></tr>
@@ -943,36 +952,36 @@ const Renderer = {
             </table></div>`;
 
             // Pseudo-code
-            html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">💻 Algorithme (pseudo-code)</h3>`;
+            html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Algorithme (pseudo-code)</h3>`;
             html += CodeBlock.create(qlearn.contenu.algorithme_pseudocode.join('\n'), null);
 
             // Exemple grille
             if (qlearn.contenu.exemple) {
                 const ex = qlearn.contenu.exemple;
-                html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">🎮 Exemple : grille ${ex.grille}</h3>`;
+                html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Exemple : grille ${ex.grille}</h3>`;
                 html += Diagrams.qLearningGrid(ex);
                 html += `<div style="margin:var(--space-4) 0"><table class="comparison-table">
                     <tr><th>Paramètre</th><th>Valeur</th></tr>
-                    <tr><td>🟢 Départ</td><td>(${ex.depart.join(', ')})</td></tr>
-                    <tr><td>🏆 Objectif</td><td>(${ex.objectif.join(', ')}) → récompense ${ex.recompenses.objectif}</td></tr>
-                    <tr><td>🚫 Case interdite</td><td>(${ex.case_interdite.join(', ')}) → récompense ${ex.recompenses.case_interdite}</td></tr>
-                    <tr><td>➡️ Déplacement</td><td>récompense ${ex.recompenses.deplacement}</td></tr>
+                    <tr><td>Départ</td><td>(${ex.depart.join(', ')})</td></tr>
+                    <tr><td>Objectif</td><td>(${ex.objectif.join(', ')}) → récompense ${ex.recompenses.objectif}</td></tr>
+                    <tr><td>Case interdite</td><td>(${ex.case_interdite.join(', ')}) → récompense ${ex.recompenses.case_interdite}</td></tr>
+                    <tr><td>Déplacement</td><td>récompense ${ex.recompenses.deplacement}</td></tr>
                 </table></div>`;
             }
 
             // 2 Méthodes Python
             if (qlearn.contenu.methodes_python) {
-                html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">💻 Comment coder Q-Learning ? (2 méthodes)</h3>`;
+                html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Comment coder Q-Learning ? (2 méthodes)</h3>`;
                 html += `<p style="color:var(--text-secondary);margin-bottom:var(--space-4)">Voici 2 façons de faire — choisissez celle qui vous convient !</p>`;
                 qlearn.contenu.methodes_python.forEach(method => {
                     let body = `<p style="color:var(--text-secondary);margin-bottom:var(--space-3)">${method.description}</p>`;
                     body += CodeBlock.create(method.code, method.resultat);
-                    html += ConceptCard.create(method.nom, '🛠️', body);
+                    html += ConceptCard.create(method.nom, this._svg.wrench, body);
                 });
             }
 
             html += QuizEngine.renderAll('ml_part_4');
-            html += ConceptCard.encourage("Bravo ! Vous avez terminé le module d'apprentissage par renforcement. Vous comprenez maintenant comment un agent apprend par essais et erreurs ! 🎉");
+            html += ConceptCard.encourage("Bravo ! Vous avez terminé le module d'apprentissage par renforcement. Vous comprenez maintenant comment un agent apprend par essais et erreurs !");
             html += ConceptCard.completeButton('ml_part_4', 1);
             html += `</div>`;
         }

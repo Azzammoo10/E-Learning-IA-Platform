@@ -1,13 +1,13 @@
 /* =============================================
    DESIGN TOKENS — E-Learning Platform
-   Warm, approachable palette for GEII students
+   Professional slate/navy/blue palette
    ============================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 /* ── Light Theme (default) ── */
 :root {
-  /* Primary — Calm Blue */
+  /* Primary — Refined Blue */
   --primary-50: #eff6ff;
   --primary-100: #dbeafe;
   --primary-200: #bfdbfe;
@@ -16,34 +16,59 @@
   --primary-500: #3b82f6;
   --primary-600: #2563eb;
   --primary-700: #1d4ed8;
+  --primary-800: #1e40af;
 
-  /* Accent — Warm Teal */
-  --accent-50: #f0fdfa;
-  --accent-100: #ccfbf1;
-  --accent-200: #99f6e4;
-  --accent-300: #5eead4;
-  --accent-400: #2dd4bf;
-  --accent-500: #14b8a6;
-  --accent-600: #0d9488;
+  /* Accent — Cool Slate Blue */
+  --accent-50: #f0f4ff;
+  --accent-100: #e0e7ff;
+  --accent-200: #c7d2fe;
+  --accent-300: #a5b4fc;
+  --accent-400: #818cf8;
+  --accent-500: #6366f1;
+  --accent-600: #4f46e5;
 
-  /* Success — Gentle Green */
+  /* Success — Muted Green */
   --success-50: #f0fdf4;
   --success-100: #dcfce7;
   --success-400: #4ade80;
   --success-500: #22c55e;
   --success-600: #16a34a;
 
-  /* Warning — Warm Orange */
-  --warning-50: #fff7ed;
-  --warning-100: #ffedd5;
-  --warning-400: #fb923c;
-  --warning-500: #f97316;
+  /* Warning — Muted Amber */
+  --warning-50: #fffbeb;
+  --warning-100: #fef3c7;
+  --warning-400: #fbbf24;
+  --warning-500: #f59e0b;
 
-  /* Error — Soft Red */
+  /* Error — Muted Red */
   --error-50: #fef2f2;
   --error-100: #fee2e2;
   --error-400: #f87171;
   --error-500: #ef4444;
+
+  /* Slate — Core Neutral Scale */
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+
+  /* Keep gray aliases for backward compat */
+  --gray-50: var(--slate-50);
+  --gray-100: var(--slate-100);
+  --gray-200: var(--slate-200);
+  --gray-300: var(--slate-300);
+  --gray-400: var(--slate-400);
+  --gray-500: var(--slate-500);
+  --gray-600: var(--slate-600);
+  --gray-700: var(--slate-700);
+  --gray-800: var(--slate-800);
+  --gray-900: var(--slate-900);
 
   /* Purple — For highlights */
   --purple-50: #faf5ff;
@@ -51,65 +76,64 @@
   --purple-400: #c084fc;
   --purple-500: #a855f7;
 
-  /* Neutrals */
-  --gray-50: #f9fafb;
-  --gray-100: #f3f4f6;
-  --gray-200: #e5e7eb;
-  --gray-300: #d1d5db;
-  --gray-400: #9ca3af;
-  --gray-500: #6b7280;
-  --gray-600: #4b5563;
-  --gray-700: #374151;
-  --gray-800: #1f2937;
-  --gray-900: #111827;
-
-  /* Semantic */
+  /* Semantic Backgrounds */
   --bg-primary: #ffffff;
   --bg-secondary: #f8fafc;
   --bg-tertiary: #f1f5f9;
   --bg-card: #ffffff;
-  --bg-sidebar: rgba(248, 250, 252, 0.85);
-  /* Glass */
-  --bg-code: #1e293b;
-  --bg-code-output: #0f172a;
+  --bg-sidebar: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  --bg-sidebar-flat: #0f172a;
+  --bg-code: #0f172a;
+  --bg-code-output: #020617;
   --bg-tooltip: #1e293b;
-  --bg-overlay: rgba(0, 0, 0, 0.4);
+  --bg-overlay: rgba(15, 23, 42, 0.5);
 
-  /* Creative Additions */
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.4);
-  --mesh-bg: radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.08) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(20, 184, 166, 0.08) 0px, transparent 50%);
+  /* Glassmorphism Tokens */
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(226, 232, 240, 0.6);
+  --glass-blur: 20px;
+  --glass-card-bg: rgba(255, 255, 255, 0.6);
+  --glass-card-border: rgba(226, 232, 240, 0.5);
 
-  --text-primary: #1e293b;
+  /* Mesh Background */
+  --mesh-bg:
+    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.04) 0px, transparent 50%),
+    radial-gradient(at 100% 50%, rgba(99, 102, 241, 0.03) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(59, 130, 246, 0.02) 0px, transparent 50%);
+
+  /* Text Colors */
+  --text-primary: #0f172a;
   --text-secondary: #475569;
   --text-tertiary: #94a3b8;
   --text-inverse: #f8fafc;
   --text-code: #e2e8f0;
   --text-link: var(--primary-600);
+  --text-heading: #0f172a;
 
+  /* Borders */
   --border-light: #e2e8f0;
   --border-medium: #cbd5e1;
   --border-focus: var(--primary-400);
+  --border-card: rgba(226, 232, 240, 0.8);
 
-  /* Shadows */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-  --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.15);
-  --shadow-inset: inset 0 2px 4px 0 rgba(255, 255, 255, 0.3);
-  /* Premium inner shine */
+  /* Shadows — Soft layered system */
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.06), 0 4px 6px -4px rgba(15, 23, 42, 0.03);
+  --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
+  --shadow-2xl: 0 25px 50px -12px rgba(15, 23, 42, 0.15);
+  --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.12);
+  --shadow-card-hover: 0 8px 30px rgba(59, 130, 246, 0.08), 0 4px 12px rgba(15, 23, 42, 0.04);
+  --shadow-inset: inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
 
   /* Typography */
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
-  --text-base: 1.0625rem;
-  /* 17px — larger for readability */
+  --text-base: 1rem;
   --text-lg: 1.125rem;
   --text-xl: 1.25rem;
   --text-2xl: 1.5rem;
@@ -127,6 +151,10 @@
   --weight-bold: 700;
   --weight-extrabold: 800;
 
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.025em;
+
   /* Spacing */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -141,11 +169,11 @@
   --space-20: 5rem;
 
   /* Borders */
-  --radius-sm: 0.5rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.25rem;
-  --radius-2xl: 1.5rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
   --radius-full: 9999px;
 
   /* Transitions */
@@ -155,27 +183,43 @@
   --transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* Layout */
-  --sidebar-width: 280px;
-  --header-height: 64px;
-  --content-max-width: 860px;
+  --sidebar-width: 272px;
+  --header-height: 60px;
+  --content-max-width: 880px;
+
+  /* Sidebar-specific (light: dark sidebar) */
+  --sidebar-text: #e2e8f0;
+  --sidebar-text-muted: #94a3b8;
+  --sidebar-text-dim: #64748b;
+  --sidebar-hover: rgba(255, 255, 255, 0.06);
+  --sidebar-active: rgba(59, 130, 246, 0.15);
+  --sidebar-border: rgba(255, 255, 255, 0.06);
+  --sidebar-icon-bg: rgba(255, 255, 255, 0.06);
+  --sidebar-icon-active-bg: var(--primary-500);
 }
 
 /* ── Dark Theme ── */
 [data-theme="dark"] {
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-tertiary: #334155;
-  --bg-card: #1e293b;
-  --bg-sidebar: rgba(15, 23, 42, 0.85);
-  --bg-code: #0d1117;
-  --bg-code-output: #010409;
-  --bg-tooltip: #334155;
-  --bg-overlay: rgba(0, 0, 0, 0.6);
+  --bg-primary: #020617;
+  --bg-secondary: #0f172a;
+  --bg-tertiary: #1e293b;
+  --bg-card: #0f172a;
+  --bg-sidebar: linear-gradient(180deg, #020617 0%, #0f172a 100%);
+  --bg-sidebar-flat: #020617;
+  --bg-code: #020617;
+  --bg-code-output: #000000;
+  --bg-tooltip: #1e293b;
+  --bg-overlay: rgba(0, 0, 0, 0.7);
 
-  --glass-bg: rgba(30, 41, 59, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.05);
-  --mesh-bg: radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(20, 184, 166, 0.05) 0px, transparent 50%);
+  --glass-bg: rgba(15, 23, 42, 0.8);
+  --glass-border: rgba(51, 65, 85, 0.5);
+  --glass-card-bg: rgba(15, 23, 42, 0.6);
+  --glass-card-border: rgba(51, 65, 85, 0.4);
+
+  --mesh-bg:
+    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 50%, rgba(99, 102, 241, 0.05) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(59, 130, 246, 0.03) 0px, transparent 50%);
 
   --text-primary: #f1f5f9;
   --text-secondary: #94a3b8;
@@ -183,16 +227,64 @@
   --text-inverse: #0f172a;
   --text-code: #e2e8f0;
   --text-link: var(--primary-400);
+  --text-heading: #f8fafc;
 
-  --border-light: #1e293b;
-  --border-medium: #334155;
+  --border-light: rgba(51, 65, 85, 0.5);
+  --border-medium: rgba(71, 85, 105, 0.5);
   --border-focus: var(--primary-500);
+  --border-card: rgba(51, 65, 85, 0.4);
 
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.25);
-  --shadow-inset: inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.5);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 25px rgba(59, 130, 246, 0.2);
+  --shadow-card-hover: 0 8px 30px rgba(59, 130, 246, 0.12), 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-inset: inset 0 1px 1px 0 rgba(255, 255, 255, 0.05);
+
+  /* Sidebar in dark mode */
+  --sidebar-hover: rgba(255, 255, 255, 0.04);
+  --sidebar-active: rgba(59, 130, 246, 0.12);
+  --sidebar-border: rgba(255, 255, 255, 0.04);
+  --sidebar-icon-bg: rgba(255, 255, 255, 0.04);
+}
+
+/* ── SVG Icon Utility ── */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon svg {
+  width: 1em;
+  height: 1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icon-sm svg {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-md svg {
+  width: 20px;
+  height: 20px;
+}
+
+.icon-lg svg {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-xl svg {
+  width: 28px;
+  height: 28px;
 }

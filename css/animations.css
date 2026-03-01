@@ -1,12 +1,12 @@
 /* =============================================
-   ANIMATIONS — Lightweight, fast transitions
+   ANIMATIONS — Subtle, professional transitions
    ============================================= */
 
 /* ── Essential Keyframes ── */
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(12px);
+        transform: translateY(8px);
     }
 
     to {
@@ -28,7 +28,7 @@
 @keyframes scaleIn {
     from {
         opacity: 0;
-        transform: scale(0.95);
+        transform: scale(0.97);
     }
 
     to {
@@ -55,7 +55,7 @@
     }
 
     50% {
-        transform: translateY(-4px);
+        transform: translateY(-3px);
     }
 }
 
@@ -66,11 +66,23 @@
     }
 }
 
-/* ── Scroll Reveal (fast) ── */
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.15);
+    }
+
+    50% {
+        box-shadow: 0 0 0 6px rgba(59, 130, 246, 0);
+    }
+}
+
+/* ── Scroll Reveal ── */
 .scroll-reveal {
     opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(8px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
 .scroll-reveal.revealed {
@@ -83,45 +95,45 @@
 }
 
 .stagger-children .scroll-reveal:nth-child(2) {
-    transition-delay: 40ms;
+    transition-delay: 50ms;
 }
 
 .stagger-children .scroll-reveal:nth-child(3) {
-    transition-delay: 80ms;
+    transition-delay: 100ms;
 }
 
 .stagger-children .scroll-reveal:nth-child(4) {
-    transition-delay: 120ms;
+    transition-delay: 150ms;
 }
 
 .stagger-children .scroll-reveal:nth-child(5) {
-    transition-delay: 160ms;
-}
-
-.stagger-children .scroll-reveal:nth-child(6) {
     transition-delay: 200ms;
 }
 
+.stagger-children .scroll-reveal:nth-child(6) {
+    transition-delay: 250ms;
+}
+
 .stagger-children .scroll-reveal:nth-child(7) {
-    transition-delay: 240ms;
+    transition-delay: 300ms;
 }
 
 .stagger-children .scroll-reveal:nth-child(8) {
-    transition-delay: 280ms;
+    transition-delay: 350ms;
 }
 
 .stagger-children .scroll-reveal:nth-child(9) {
-    transition-delay: 320ms;
+    transition-delay: 400ms;
 }
 
 /* ── Page Enter ── */
 .page-enter {
-    animation: fadeInUp 0.3s ease forwards;
+    animation: fadeInUp 0.35s ease forwards;
 }
 
-/* ── Hover Lift (simple) ── */
+/* ── Hover Lift ── */
 .hover-lift {
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .hover-lift:hover {
@@ -131,25 +143,21 @@
 
 /* ── Module Cards ── */
 .module-card {
-    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .module-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-}
-
-[data-theme="dark"] .module-card:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card-hover);
 }
 
 /* ── Concept Cards ── */
 .concept-card {
-    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .concept-card:hover {
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-sm);
 }
 
 .concept-card-body {
@@ -157,16 +165,16 @@
 }
 
 .concept-card.expanded {
-    border-color: var(--primary-300);
+    border-color: var(--primary-200);
 }
 
 [data-theme="dark"] .concept-card.expanded {
-    border-color: var(--primary-600);
+    border-color: rgba(59, 130, 246, 0.15);
 }
 
 /* ── Quiz ── */
 .quiz-feedback {
-    animation: fadeInUp 0.2s ease forwards;
+    animation: fadeInUp 0.25s ease forwards;
 }
 
 .quiz-option {
@@ -211,7 +219,7 @@
 }
 
 [data-theme="dark"] .comparison-table tbody tr:hover {
-    background: rgba(59, 130, 246, 0.08);
+    background: rgba(59, 130, 246, 0.05);
 }
 
 /* ── Code Block ── */
@@ -229,16 +237,16 @@
 }
 
 .flashcard-container:hover {
-    transform: scale(1.01);
+    transform: scale(1.005);
 }
 
 /* ── Theme Toggle ── */
 .theme-toggle {
-    transition: transform 0.15s ease;
+    transition: all 0.2s ease;
 }
 
 .theme-toggle:active {
-    transform: rotate(180deg);
+    transform: scale(0.92);
 }
 
 /* ── Sidebar ── */
@@ -248,21 +256,21 @@
 
 /* ── Glossary Modal ── */
 .glossary-modal {
-    animation: scaleIn 0.2s ease;
+    animation: scaleIn 0.25s ease;
 }
 
 /* ── Ripple Click Effect ── */
 .ripple-effect {
     position: absolute;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.2);
     transform: scale(0);
     animation: rippleExpand 0.4s ease-out forwards;
     pointer-events: none;
 }
 
 [data-theme="dark"] .ripple-effect {
-    background: rgba(59, 130, 246, 0.15);
+    background: rgba(59, 130, 246, 0.12);
 }
 
 /* ── Module Progress Bar ── */

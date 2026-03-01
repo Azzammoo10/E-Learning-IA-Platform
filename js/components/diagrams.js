@@ -45,9 +45,9 @@ const Diagrams = {
     return `
       <div class="scroll-reveal" style="margin:var(--space-4) 0">
         <table class="comparison-table">
-          <tr><th>Caractéristique</th><th>Liste Python 📋</th><th>Array NumPy 🔢</th></tr>
+          <tr><th>Caractéristique</th><th>Liste Python</th><th>Array NumPy</th></tr>
           <tr><td>Types de données</td><td>Peut mélanger (int, str, bool...)</td><td>Un seul type (homogène)</td></tr>
-          <tr><td>Vitesse</td><td>Lente pour les calculs</td><td>Très rapide ⚡</td></tr>
+          <tr><td>Vitesse</td><td>Lente pour les calculs</td><td>Très rapide</td></tr>
           <tr><td>Opérations math</td><td>Pas directement</td><td>Oui ! (+, -, *, / sur chaque élément)</td></tr>
           <tr><td>Quand utiliser ?</td><td>Données variées</td><td>Calculs numériques</td></tr>
         </table>
@@ -90,7 +90,7 @@ const Diagrams = {
     return `
       <div class="scroll-reveal" style="margin:var(--space-4) 0">
         <table class="comparison-table">
-          <tr><th>Caractéristique</th><th>Series 📊</th><th>DataFrame 📋</th></tr>
+          <tr><th>Caractéristique</th><th>Series</th><th>DataFrame</th></tr>
           <tr><td>Dimensions</td><td>1D (une colonne)</td><td>2D (tableau complet)</td></tr>
           <tr><td>Analogie</td><td>Une colonne Excel</td><td>Une feuille Excel entière</td></tr>
           <tr><td>Création</td><td>pd.Series([1, 2, 3])</td><td>pd.DataFrame({'A': [1,2], 'B': [3,4]})</td></tr>
@@ -104,11 +104,11 @@ const Diagrams = {
     const w = 600, h = 100;
     let svg = `<svg viewBox="0 0 ${w} ${h}" style="max-width:${w}px">`;
     const steps = [
-      { icon: '📊', label: 'Données', color: 'var(--primary-400)' },
-      { icon: '⚙️', label: 'plt.plot()', color: 'var(--accent-400)' },
-      { icon: '🎨', label: 'Style', color: 'var(--purple-400)' },
-      { icon: '📝', label: 'Labels', color: 'var(--warning-400)' },
-      { icon: '👁️', label: 'plt.show()', color: 'var(--success-400)' }
+      { label: 'Données', color: 'var(--primary-400)' },
+      { label: 'plt.plot()', color: 'var(--accent-400)' },
+      { label: 'Style', color: 'var(--purple-400)' },
+      { label: 'Labels', color: 'var(--warning-400)' },
+      { label: 'plt.show()', color: 'var(--success-400)' }
     ];
     steps.forEach((s, i) => {
       const x = 10 + i * 120;
@@ -117,7 +117,7 @@ const Diagrams = {
         svg += `<polygon points="${x + 5},35 ${x + 12},40 ${x + 5},45" fill="var(--border-medium)"/>`;
       }
       svg += `<rect x="${x + 15}" y="15" width="90" height="50" rx="10" fill="var(--bg-card)" stroke="${s.color}" stroke-width="2"/>`;
-      svg += `<text x="${x + 60}" y="38" text-anchor="middle" font-size="16">${s.icon}</text>`;
+      svg += `<text x="${x + 60}" y="38" text-anchor="middle" font-size="13" fill="var(--text-secondary)" font-family="var(--font-family)" font-weight="600">${i + 1}</text>`;
       svg += `<text x="${x + 60}" y="55" text-anchor="middle" font-size="10" fill="var(--text-secondary)" font-family="var(--font-family)">${s.label}</text>`;
       svg += `<text x="${x + 60}" y="85" text-anchor="middle" font-size="9" fill="var(--text-tertiary)" font-family="var(--font-family)">Étape ${i + 1}</text>`;
     });
@@ -129,7 +129,7 @@ const Diagrams = {
     return `
       <div class="scroll-reveal" style="margin:var(--space-4) 0">
         <table class="comparison-table">
-          <tr><th></th><th>loc 🏷️</th><th>iloc 🔢</th></tr>
+          <tr><th></th><th>loc</th><th>iloc</th></tr>
           <tr><td>Signification</td><td>Location (par étiquette)</td><td>Integer location (par position)</td></tr>
           <tr><td>Utilise</td><td>Les noms / labels</td><td>Les numéros de position</td></tr>
           <tr><td>Exemple</td><td>df.loc[5] → ligne avec index 5</td><td>df.iloc[0] → première ligne</td></tr>
@@ -147,7 +147,7 @@ const Diagrams = {
           <tr><td><code class="inline">import module</code></td><td>Quand on utilise beaucoup de fonctions du module</td><td>import math → math.sqrt(25)</td></tr>
           <tr><td><code class="inline">import module as alias</code></td><td>Quand le nom est long</td><td>import numpy as np → np.array()</td></tr>
           <tr><td><code class="inline">from module import func</code></td><td>Quand on a besoin d'une seule fonction</td><td>from math import sqrt → sqrt(25)</td></tr>
-          <tr><td><code class="inline">from module import *</code></td><td>⚠️ À éviter ! Risque de conflits</td><td>from numpy import *</td></tr>
+          <tr><td><code class="inline">from module import *</code></td><td>À éviter ! Risque de conflits</td><td>from numpy import *</td></tr>
         </table>
       </div>
     `;
@@ -158,7 +158,7 @@ const Diagrams = {
   mlPipeline(steps) {
     const w = 700, h = 80;
     let svg = `<svg viewBox="0 0 ${w} ${h}" style="max-width:${w}px">`;
-    const icons = ['📋', '⚙️', '🔄', '🚀'];
+    const stepNums = [1, 2, 3, 4];
     steps.forEach((s, i) => {
       const x = 10 + i * 175;
       if (i > 0) {
@@ -166,7 +166,7 @@ const Diagrams = {
         svg += `<polygon points="${x + 5},25 ${x + 12},30 ${x + 5},35" fill="var(--border-medium)"/>`;
       }
       svg += `<rect x="${x + 15}" y="8" width="140" height="44" rx="10" fill="var(--bg-card)" stroke="var(--primary-400)" stroke-width="2"/>`;
-      svg += `<text x="${x + 85}" y="28" text-anchor="middle" font-size="13">${icons[i] || '📌'}</text>`;
+      svg += `<text x="${x + 85}" y="28" text-anchor="middle" font-size="13" fill="var(--text-secondary)" font-family="var(--font-family)" font-weight="600">${stepNums[i] || i + 1}</text>`;
       svg += `<text x="${x + 85}" y="44" text-anchor="middle" font-size="9" fill="var(--text-secondary)" font-family="var(--font-family)">Étape ${i + 1}</text>`;
       svg += `<text x="${x + 85}" y="68" text-anchor="middle" font-size="9" fill="var(--text-tertiary)" font-family="var(--font-family)">${s.nom.split(' ').slice(0, 3).join(' ')}</text>`;
     });
@@ -178,7 +178,7 @@ const Diagrams = {
     return `
             <div class="scroll-reveal" style="margin:var(--space-4) 0">
                 <table class="comparison-table">
-                    <tr><th></th><th>Classification 🏷️</th><th>Régression 📈</th></tr>
+                    <tr><th></th><th>Classification</th><th>Régression</th></tr>
                     <tr><td>Prédit</td><td>Une catégorie / classe</td><td>Une valeur numérique continue</td></tr>
                     <tr><td>Sortie</td><td>Oui/Non, Spam/Pas spam, 0/1</td><td>Prix, température, salaire</td></tr>
                     <tr><td>Exemple</td><td>Cet email est-il spam ?</td><td>Quel sera le prix de la maison ?</td></tr>
@@ -191,7 +191,7 @@ const Diagrams = {
   kMeansPipeline(steps) {
     const w = 700, h = 80;
     let svg = `<svg viewBox="0 0 ${w} ${h}" style="max-width:${w}px">`;
-    const icons = ['🎯', '📍', '📏', '🔄', '📊', '✅'];
+    const stepNums2 = [1, 2, 3, 4, 5, 6];
     const shortSteps = steps.slice(0, Math.min(steps.length, 6));
     const spacing = w / shortSteps.length;
     shortSteps.forEach((s, i) => {
@@ -201,7 +201,7 @@ const Diagrams = {
         svg += `<line x1="${x - 10}" y1="30" x2="${x + 5}" y2="30" stroke="var(--accent-400)" stroke-width="2" stroke-dasharray="4,3"/>`;
       }
       svg += `<rect x="${x + 5}" y="8" width="${sw}" height="44" rx="8" fill="var(--bg-card)" stroke="var(--accent-400)" stroke-width="2"/>`;
-      svg += `<text x="${x + sw / 2 + 5}" y="28" text-anchor="middle" font-size="14">${icons[i] || '📌'}</text>`;
+      svg += `<text x="${x + sw / 2 + 5}" y="28" text-anchor="middle" font-size="13" fill="var(--text-secondary)" font-family="var(--font-family)" font-weight="600">${stepNums2[i] || i + 1}</text>`;
       svg += `<text x="${x + sw / 2 + 5}" y="42" text-anchor="middle" font-size="8" fill="var(--text-secondary)" font-family="var(--font-family)">Ét. ${i + 1}</text>`;
     });
     svg += `</svg>`;
@@ -213,12 +213,10 @@ const Diagrams = {
     let svg = `<svg viewBox="0 0 ${w} ${h}" style="max-width:${w}px">`;
     // Agent box
     svg += `<rect x="30" y="20" width="140" height="60" rx="12" fill="var(--primary-50)" stroke="var(--primary-400)" stroke-width="2"/>`;
-    svg += `<text x="100" y="45" text-anchor="middle" font-size="16">🤖</text>`;
-    svg += `<text x="100" y="65" text-anchor="middle" font-size="12" fill="var(--primary-700)" font-family="var(--font-family)" font-weight="600">Agent</text>`;
+    svg += `<text x="100" y="50" text-anchor="middle" font-size="12" fill="var(--primary-700)" font-family="var(--font-family)" font-weight="700">Agent</text>`;
     // Environment box
     svg += `<rect x="280" y="20" width="140" height="60" rx="12" fill="var(--accent-50)" stroke="var(--accent-400)" stroke-width="2"/>`;
-    svg += `<text x="350" y="45" text-anchor="middle" font-size="16">🌍</text>`;
-    svg += `<text x="350" y="65" text-anchor="middle" font-size="12" fill="var(--accent-700)" font-family="var(--font-family)" font-weight="600">Environnement</text>`;
+    svg += `<text x="350" y="50" text-anchor="middle" font-size="12" fill="var(--accent-700)" font-family="var(--font-family)" font-weight="700">Env.</text>`;
     // Action arrow (agent → env)
     svg += `<line x1="170" y1="40" x2="275" y2="40" stroke="var(--success-500)" stroke-width="2"/>`;
     svg += `<polygon points="275,35 282,40 275,45" fill="var(--success-500)"/>`;
@@ -260,11 +258,11 @@ const Diagrams = {
         svg += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="6" fill="${fill}" stroke="${stroke}" stroke-width="2"/>`;
         // Labels
         if (r === example.depart[0] && c === example.depart[1]) {
-          svg += `<text x="${x + cellSize / 2}" y="${y + cellSize / 2 + 5}" text-anchor="middle" font-size="20">🟢</text>`;
+          svg += `<text x="${x + cellSize / 2}" y="${y + cellSize / 2 + 5}" text-anchor="middle" font-size="14" fill="var(--success-600)" font-family="var(--font-family)" font-weight="700">S</text>`;
         } else if (r === example.objectif[0] && c === example.objectif[1]) {
-          svg += `<text x="${x + cellSize / 2}" y="${y + cellSize / 2 + 5}" text-anchor="middle" font-size="20">🏆</text>`;
+          svg += `<text x="${x + cellSize / 2}" y="${y + cellSize / 2 + 5}" text-anchor="middle" font-size="14" fill="var(--warning-600)" font-family="var(--font-family)" font-weight="700">G</text>`;
         } else if (r === example.case_interdite[0] && c === example.case_interdite[1]) {
-          svg += `<text x="${x + cellSize / 2}" y="${y + cellSize / 2 + 5}" text-anchor="middle" font-size="20">🚫</text>`;
+          svg += `<text x="${x + cellSize / 2}" y="${y + cellSize / 2 + 5}" text-anchor="middle" font-size="14" fill="var(--error-500)" font-family="var(--font-family)" font-weight="700">X</text>`;
         }
         // Coordinates
         svg += `<text x="${x + 5}" y="${y + 14}" font-size="8" fill="var(--text-tertiary)" font-family="var(--font-mono)">${r},${c}</text>`;
@@ -283,6 +281,6 @@ const Diagrams = {
       }
     }
     svg += `</svg>`;
-    return `<div class="diagram-container scroll-reveal">${svg}<div class="diagram-label">🟢 Départ → 🏆 Objectif | 🚫 Case interdite | --- Chemin optimal</div></div>`;
+    return `<div class="diagram-container scroll-reveal">${svg}<div class="diagram-label">S = Départ | G = Objectif | X = Case interdite | --- Chemin optimal</div></div>`;
   }
 };
