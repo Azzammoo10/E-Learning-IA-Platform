@@ -14,6 +14,7 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    overflow-x: hidden;
 }
 
 body {
@@ -49,6 +50,7 @@ body::before {
 .app {
     display: flex;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 /* =============================================
@@ -381,6 +383,8 @@ body::before {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    min-width: 0;
+    overflow-x: hidden;
 }
 
 /* ── Header — Frosted Glass ── */
@@ -545,6 +549,7 @@ body::before {
     max-width: calc(var(--content-max-width) + var(--space-16));
     margin: 0 auto;
     width: 100%;
+    overflow-x: hidden;
 }
 
 /* ── Typography ── */
@@ -913,6 +918,11 @@ body::before {
     gap: var(--space-3);
 }
 
+.chart-container {
+    max-width: 600px;
+    width: 100%;
+}
+
 /* =============================================
    RESPONSIVE
    ============================================= */
@@ -993,7 +1003,8 @@ body::before {
     }
 
     .diagram-container svg {
-        min-width: 320px;
+        max-width: 100%;
+        height: auto;
     }
 
     .flashcard-container {
@@ -1099,6 +1110,28 @@ body::before {
         padding: var(--space-3) var(--space-3) var(--space-6);
     }
 
+    /* ── Global overflow containment for mobile ── */
+    .page-enter,
+    .page-enter>* {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .diagram-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .diagram-container svg {
+        max-width: 100% !important;
+        height: auto;
+    }
+
+    /* Force all inline-styled SVGs to respect container */
+    svg[style*="max-width"] {
+        max-width: 100% !important;
+    }
+
     .section-title {
         font-size: var(--text-lg) !important;
         line-height: 1.3;
@@ -1129,6 +1162,7 @@ body::before {
     }
 
     /* Charts & containers full-width */
+    .chart-container,
     [id$="-chart"],
     [id$="-chart-1"] {
         max-width: 100% !important;

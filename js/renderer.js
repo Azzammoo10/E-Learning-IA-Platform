@@ -282,7 +282,7 @@ const Renderer = {
         } else if (section.titre === 'Application') {
             html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">${section.titre} pratique</h2>`;
             html += ConceptCard.encourage(section.contexte + " — C'est exactement le genre de problème qu'on résout avec NumPy !");
-            html += `<div id="grades-chart" style="margin:var(--space-6) 0;max-width:600px"></div>`;
+            html += `<div id="grades-chart" class="chart-container" style="margin:var(--space-6) 0"></div>`;
             section.exercices.forEach(ex => {
                 let body = `<p style="margin-bottom:var(--space-2)">${ex.description}</p>`;
                 if (ex.code) body += CodeBlock.create(ex.code, ex.resultat || '');
@@ -694,7 +694,7 @@ const Renderer = {
 
             // Interactive chart
             html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Visualisation interactive</h3>`;
-            html += `<div id="lr-chart-1" class="concept-card expanded" style="padding:var(--space-4);max-width:600px"></div>`;
+            html += `<div id="lr-chart-1" class="concept-card expanded chart-container" style="padding:var(--space-4)"></div>`;
 
             // Exemples
             if (linReg.contenu.exemples) {
@@ -759,7 +759,7 @@ const Renderer = {
 
             // KNN interactive chart
             html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Visualisation KNN</h3>`;
-            html += `<div id="knn-chart-1" class="concept-card expanded" style="padding:var(--space-4);max-width:600px"></div>`;
+            html += `<div id="knn-chart-1" class="concept-card expanded chart-container" style="padding:var(--space-4)"></div>`;
 
             // Exemples
             if (knn.contenu.exemples) {
@@ -854,7 +854,7 @@ const Renderer = {
 
             // Interactive chart
             html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Visualisation K-Means</h3>`;
-            html += `<div id="kmeans-chart" class="concept-card expanded" style="padding:var(--space-4);max-width:600px"></div>`;
+            html += `<div id="kmeans-chart" class="concept-card expanded chart-container" style="padding:var(--space-4)"></div>`;
 
             // 2 Méthodes Python
             if (kmeans.contenu.methodes_python) {
