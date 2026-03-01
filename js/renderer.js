@@ -650,6 +650,11 @@ const Renderer = {
             html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">📐 Régression Linéaire</h2>`;
             html += ConceptCard.definition(linReg.contenu.objectif);
 
+            // Simple explanation
+            if (linReg.contenu.explication_simple) {
+                html += ConceptCard.why(linReg.contenu.explication_simple);
+            }
+
             // Types
             html += `<div style="margin:var(--space-4) 0"><table class="comparison-table">
                 <tr><th>Type</th><th>Description</th></tr>
@@ -696,6 +701,17 @@ const Renderer = {
                 });
             }
 
+            // 2 Méthodes Python
+            if (linReg.contenu.methodes_python) {
+                html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">💻 Comment coder la Régression Linéaire ? (2 méthodes)</h3>`;
+                html += `<p style="color:var(--text-secondary);margin-bottom:var(--space-4)">Voici 2 façons de faire — choisissez celle qui vous convient !</p>`;
+                linReg.contenu.methodes_python.forEach(method => {
+                    let body = `<p style="color:var(--text-secondary);margin-bottom:var(--space-3)">${method.description}</p>`;
+                    body += CodeBlock.create(method.code, method.resultat);
+                    html += ConceptCard.create(method.nom, '🛠️', body);
+                });
+            }
+
             html += QuizEngine.renderAll('ml_part_2');
             html += ConceptCard.completeButton('ml_part_2', 3);
             html += `</div>`;
@@ -707,10 +723,16 @@ const Renderer = {
             html += `<div id="section-4" style="margin-top:var(--space-8)">`;
             html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">🎯 K Plus Proches Voisins (KNN)</h2>`;
             html += ConceptCard.definition(knn.contenu.definition);
-            html += ConceptCard.why(
-                `C'est l'un des algorithmes les plus intuitifs ! L'idée est simple : <em>"Dis-moi qui sont tes voisins, ` +
-                `je te dirai qui tu es."</em> On regarde les K points les plus proches pour décider.`
-            );
+
+            // Simple explanation
+            if (knn.contenu.explication_simple) {
+                html += ConceptCard.why(knn.contenu.explication_simple);
+            } else {
+                html += ConceptCard.why(
+                    `C'est l'un des algorithmes les plus intuitifs ! L'idée est simple : <em>"Dis-moi qui sont tes voisins, ` +
+                    `je te dirai qui tu es."</em> On regarde les K points les plus proches pour décider.`
+                );
+            }
 
             // Étapes
             html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">📋 Les étapes de KNN</h3>`;
@@ -743,6 +765,17 @@ const Renderer = {
                     }
                     body += `<div class="info-box encourage"><span class="info-box-icon">🎯</span><div>Prédiction : <strong>${ex.prediction}${ex.interpretation ? ' (' + ex.interpretation + ')' : ''}</strong></div></div>`;
                     html += ConceptCard.create(ex.nom, '📊', body);
+                });
+            }
+
+            // 2 Méthodes Python
+            if (knn.contenu.methodes_python) {
+                html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">💻 Comment coder KNN ? (2 méthodes)</h3>`;
+                html += `<p style="color:var(--text-secondary);margin-bottom:var(--space-4)">Voici 2 façons de faire — choisissez celle qui vous convient !</p>`;
+                knn.contenu.methodes_python.forEach(method => {
+                    let body = `<p style="color:var(--text-secondary);margin-bottom:var(--space-3)">${method.description}</p>`;
+                    body += CodeBlock.create(method.code, method.resultat);
+                    html += ConceptCard.create(method.nom, '🛠️', body);
                 });
             }
 
@@ -786,10 +819,16 @@ const Renderer = {
             html += `<div id="section-2" style="margin-top:var(--space-8)">`;
             html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">🎯 L'algorithme K-Means</h2>`;
             html += ConceptCard.definition(kmeans.contenu.definition);
-            html += ConceptCard.why(
-                `K-Means est l'algorithme de clustering le plus populaire. Il est simple à comprendre ` +
-                `et efficace pour regrouper des données en K clusters.`
-            );
+
+            // Simple explanation
+            if (kmeans.contenu.explication_simple) {
+                html += ConceptCard.why(kmeans.contenu.explication_simple);
+            } else {
+                html += ConceptCard.why(
+                    `K-Means est l'algorithme de clustering le plus populaire. Il est simple à comprendre ` +
+                    `et efficace pour regrouper des données en K clusters.`
+                );
+            }
 
             // Distance formula
             html += `<div class="info-box definition" style="margin:var(--space-4) 0">
@@ -807,6 +846,17 @@ const Renderer = {
             // Interactive chart
             html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">📊 Visualisation K-Means</h3>`;
             html += `<div id="kmeans-chart" class="concept-card expanded" style="padding:var(--space-4);max-width:600px"></div>`;
+
+            // 2 Méthodes Python
+            if (kmeans.contenu.methodes_python) {
+                html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">💻 Comment coder K-Means ? (2 méthodes)</h3>`;
+                html += `<p style="color:var(--text-secondary);margin-bottom:var(--space-4)">Voici 2 façons de faire — choisissez celle qui vous convient !</p>`;
+                kmeans.contenu.methodes_python.forEach(method => {
+                    let body = `<p style="color:var(--text-secondary);margin-bottom:var(--space-3)">${method.description}</p>`;
+                    body += CodeBlock.create(method.code, method.resultat);
+                    html += ConceptCard.create(method.nom, '🛠️', body);
+                });
+            }
 
             html += QuizEngine.renderAll('ml_part_3');
             html += ConceptCard.completeButton('ml_part_3', 2);
@@ -849,6 +899,12 @@ const Renderer = {
             html += `<div id="section-1" style="margin-top:var(--space-8)">`;
             html += `<h2 style="font-size:var(--text-2xl);font-weight:var(--weight-bold);margin-bottom:var(--space-4)">🧠 Q-Learning</h2>`;
             html += ConceptCard.definition(qlearn.contenu.definition);
+
+            // Simple explanation
+            if (qlearn.contenu.explication_simple) {
+                html += ConceptCard.why(qlearn.contenu.explication_simple);
+            }
+
             html += ConceptCard.tip(qlearn.contenu.contrainte);
 
             // Q-Table
@@ -902,6 +958,17 @@ const Renderer = {
                     <tr><td>🚫 Case interdite</td><td>(${ex.case_interdite.join(', ')}) → récompense ${ex.recompenses.case_interdite}</td></tr>
                     <tr><td>➡️ Déplacement</td><td>récompense ${ex.recompenses.deplacement}</td></tr>
                 </table></div>`;
+            }
+
+            // 2 Méthodes Python
+            if (qlearn.contenu.methodes_python) {
+                html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">💻 Comment coder Q-Learning ? (2 méthodes)</h3>`;
+                html += `<p style="color:var(--text-secondary);margin-bottom:var(--space-4)">Voici 2 façons de faire — choisissez celle qui vous convient !</p>`;
+                qlearn.contenu.methodes_python.forEach(method => {
+                    let body = `<p style="color:var(--text-secondary);margin-bottom:var(--space-3)">${method.description}</p>`;
+                    body += CodeBlock.create(method.code, method.resultat);
+                    html += ConceptCard.create(method.nom, '🛠️', body);
+                });
             }
 
             html += QuizEngine.renderAll('ml_part_4');

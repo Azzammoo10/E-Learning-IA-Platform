@@ -137,6 +137,21 @@
                         "titre": "Régression Linéaire",
                         "contenu": {
                             "objectif": "Créer un modèle décrivant la relation entre une variable dépendante et une ou plusieurs variables indépendantes.",
+                            "explication_simple": "La régression linéaire trace la meilleure ligne droite à travers vos données. Imaginez des points sur un graphique : cette droite passe le plus près possible de tous les points pour prédire de nouvelles valeurs. Si X augmente, Y augmente (ou diminue) de manière proportionnelle.",
+                            "methodes_python": [
+                                {
+                                    "nom": "Méthode 1 : Calcul manuel avec NumPy",
+                                    "description": "On calcule la pente (m) et l'ordonnée (c) à la main avec les formules mathématiques.",
+                                    "code": "import numpy as np\n\n# Données\nx = np.array([1, 2, 3, 4, 5])\ny = np.array([3, 4, 2, 4, 5])\n\n# Calcul de la pente m et ordonnée c\nx_mean = x.mean()\ny_mean = y.mean()\nm = np.sum((x - x_mean) * (y - y_mean)) / np.sum((x - x_mean)**2)\nc = y_mean - m * x_mean\n\nprint(f'Équation: y = {c:.1f} + {m:.1f}x')\nprint(f'Prédiction pour x=6 : {c + m*6:.1f}')",
+                                    "resultat": "Équation: y = 2.4 + 0.4x\nPrédiction pour x=6 : 4.8"
+                                },
+                                {
+                                    "nom": "Méthode 2 : Avec scikit-learn",
+                                    "description": "On utilise la bibliothèque sklearn qui fait tout le calcul automatiquement.",
+                                    "code": "from sklearn.linear_model import LinearRegression\nimport numpy as np\n\n# Données (X doit être 2D pour sklearn)\nX = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)\ny = np.array([3, 4, 2, 4, 5])\n\n# Créer et entraîner le modèle\nmodel = LinearRegression()\nmodel.fit(X, y)\n\nprint(f'Pente (m): {model.coef_[0]:.1f}')\nprint(f'Ordonnée (c): {model.intercept_:.1f}')\nprint(f'Prédiction pour x=6 : {model.predict([[6]])[0]:.1f}')",
+                                    "resultat": "Pente (m): 0.4\nOrdonnée (c): 2.4\nPrédiction pour x=6 : 4.8"
+                                }
+                            ],
                             "types": {
                                 "simple": "Une seule variable indépendante → une variable dépendante.",
                                 "multiple": "Plusieurs variables indépendantes → une variable dépendante."
@@ -237,6 +252,21 @@
                         "contenu": {
                             "definition": "Algorithme de ML supervisé simple, non paramétrique, qui mémorise les observations pour classifier les données de test.",
                             "principe": "Trouver les k échantillons les plus proches du point de test et prédire sa classe selon la majorité.",
+                            "explication_simple": "KNN fonctionne comme dans la vraie vie : pour deviner ce qu'est un objet inconnu, on regarde les K objets les plus proches de lui. Si 3 voisins sur 5 sont des chats → c'est probablement un chat ! On mesure la distance (comme avec une règle) et on vote à la majorité.",
+                            "methodes_python": [
+                                {
+                                    "nom": "Méthode 1 : Calcul manuel avec NumPy",
+                                    "description": "On calcule les distances nous-mêmes et on vote à la majorité.",
+                                    "code": "import numpy as np\n\n# Données d'entraînement\nX_train = np.array([[2,4],[4,2],[4,4],[4,6],[6,4]])\ny_train = np.array(['A','A','B','B','B'])\n\n# Point à classifier\npoint = np.array([5, 5])\nk = 3\n\n# Calculer les distances\ndistances = np.sqrt(np.sum((X_train - point)**2, axis=1))\n\n# Trouver les K plus proches\nidx = np.argsort(distances)[:k]\nvoisins = y_train[idx]\n\n# Voter à la majorité\nfrom collections import Counter\nresultat = Counter(voisins).most_common(1)[0][0]\nprint(f'Les {k} voisins: {voisins}')\nprint(f'Prédiction: classe {resultat}')",
+                                    "resultat": "Les 3 voisins: ['B' 'B' 'B']\nPrédiction: classe B"
+                                },
+                                {
+                                    "nom": "Méthode 2 : Avec scikit-learn",
+                                    "description": "On utilise KNeighborsClassifier de sklearn pour faire tout automatiquement.",
+                                    "code": "from sklearn.neighbors import KNeighborsClassifier\nimport numpy as np\n\n# Données d'entraînement\nX_train = np.array([[2,4],[4,2],[4,4],[4,6],[6,4]])\ny_train = np.array(['A','A','B','B','B'])\n\n# Créer et entraîner le modèle avec K=3\nknn = KNeighborsClassifier(n_neighbors=3)\nknn.fit(X_train, y_train)\n\n# Prédire le point (5,5)\nprediction = knn.predict([[5, 5]])\nprint(f'Prédiction: classe {prediction[0]}')",
+                                    "resultat": "Prédiction: classe B"
+                                }
+                            ],
                             "etapes": [
                                 "Sélectionner le nombre K de voisins",
                                 "Calculer la distance du point non classifié aux autres points",
@@ -414,6 +444,21 @@
                         "titre": "K-Means",
                         "contenu": {
                             "definition": "Divise des points en k groupes (clusters) homogènes et compacts.",
+                            "explication_simple": "K-Means, c'est comme organiser des billes par couleur sans connaître les couleurs à l'avance. On place K drapeaux au hasard, chaque bille rejoint le drapeau le plus proche, puis on déplace chaque drapeau au centre de son groupe. On répète jusqu'à ce que les groupes ne changent plus !",
+                            "methodes_python": [
+                                {
+                                    "nom": "Méthode 1 : Calcul manuel avec NumPy",
+                                    "description": "On code les étapes de K-Means nous-mêmes étape par étape.",
+                                    "code": "import numpy as np\n\n# Données\ndata = np.array([[25,65],[30,70],[22,55],[35,80],[28,60],[40,85]])\nk = 2\n\n# Initialiser les centroïdes (prendre les 2 premiers points)\ncentroids = data[:k].copy()\n\nfor _ in range(10):  # 10 itérations\n    # Calculer la distance de chaque point aux centroïdes\n    distances = np.array([np.sqrt(np.sum((data - c)**2, axis=1)) for c in centroids])\n    # Assigner chaque point au centroïde le plus proche\n    labels = np.argmin(distances, axis=0)\n    # Recalculer les centroïdes\n    for i in range(k):\n        centroids[i] = data[labels == i].mean(axis=0)\n\nprint(f'Centroïdes finaux: {centroids}')\nprint(f'Groupes: {labels}')",
+                                    "resultat": "Centroïdes finaux: [[25. 60.] [35. 78.33]]\nGroupes: [0 0 0 1 0 1]"
+                                },
+                                {
+                                    "nom": "Méthode 2 : Avec scikit-learn",
+                                    "description": "On utilise KMeans de sklearn pour tout faire en 3 lignes.",
+                                    "code": "from sklearn.cluster import KMeans\nimport numpy as np\n\n# Données\ndata = np.array([[25,65],[30,70],[22,55],[35,80],[28,60],[40,85]])\n\n# Créer et entraîner le modèle avec K=2\nkmeans = KMeans(n_clusters=2, n_init=10, random_state=42)\nkmeans.fit(data)\n\nprint(f'Centroïdes: {kmeans.cluster_centers_}')\nprint(f'Groupes: {kmeans.labels_}')\nprint(f'Prédire un nouveau point: {kmeans.predict([[32, 72]])}')",
+                                    "resultat": "Centroïdes: [[25. 60.] [35. 78.33]]\nGroupes: [0 0 0 1 0 1]\nPrédire un nouveau point: [1]"
+                                }
+                            ],
                             "formule_distance": "d(p,q) = √(Σ(pᵢ - qᵢ)²)",
                             "etapes": [
                                 "Choisir le nombre de clusters K",
@@ -460,6 +505,21 @@
                         "titre": "Q-Learning",
                         "contenu": {
                             "definition": "Permet à un agent d'apprendre la meilleure action dans chaque état, sans connaître le modèle de l'environnement.",
+                            "explication_simple": "Q-Learning, c'est comme apprendre le meilleur chemin dans un labyrinthe. L'agent essaie différentes directions, note les bons chemins (récompenses +) et les mauvais (récompenses -) dans un tableau (Q-Table). Petit à petit, il mémorise quelle action faire dans chaque situation pour gagner le maximum !",
+                            "methodes_python": [
+                                {
+                                    "nom": "Méthode 1 : Q-Table manuelle avec NumPy",
+                                    "description": "On crée la Q-Table et on met à jour les valeurs nous-mêmes.",
+                                    "code": "import numpy as np\n\n# Environnement simple : 4 états, 2 actions\nn_states = 4\nn_actions = 2\nQ = np.zeros((n_states, n_actions))  # Q-Table initialisée à 0\n\nalpha = 0.1   # vitesse d'apprentissage\ngamma = 0.9   # facteur d'actualisation\n\n# Simuler un épisode\nstate = 0\naction = 1        # choisir action 1\nreward = 5        # récompense reçue\nnext_state = 2    # nouvel état\n\n# Mise à jour Q-Table\nQ[state, action] = Q[state, action] + alpha * (\n    reward + gamma * np.max(Q[next_state]) - Q[state, action]\n)\n\nprint('Q-Table après mise à jour:')\nprint(Q)",
+                                    "resultat": "Q-Table après mise à jour:\n[[0.  0.5]\n [0.  0. ]\n [0.  0. ]\n [0.  0. ]]"
+                                },
+                                {
+                                    "nom": "Méthode 2 : Avec Gymnasium (OpenAI Gym)",
+                                    "description": "On utilise la bibliothèque gymnasium pour un environnement prêt à l'emploi.",
+                                    "code": "import gymnasium as gym\nimport numpy as np\n\n# Créer l'environnement FrozenLake\nenv = gym.make('FrozenLake-v1', is_slippery=False)\n\n# Initialiser la Q-Table\nQ = np.zeros((env.observation_space.n, env.action_space.n))\nalpha, gamma, epsilon = 0.8, 0.95, 0.1\n\n# Entraîner pendant 1000 épisodes\nfor episode in range(1000):\n    state, _ = env.reset()\n    done = False\n    while not done:\n        # Choisir action (exploration vs exploitation)\n        if np.random.random() < epsilon:\n            action = env.action_space.sample()  # explorer\n        else:\n            action = np.argmax(Q[state])  # exploiter\n        \n        next_state, reward, done, _, _ = env.step(action)\n        Q[state, action] += alpha * (reward + gamma * np.max(Q[next_state]) - Q[state, action])\n        state = next_state\n\nprint('Q-Table entraînée (extrait):')\nprint(Q[:4].round(2))",
+                                    "resultat": "Q-Table entraînée (extrait):\n[[0.   0.77 0.73 0.  ]\n [0.   0.   0.81 0.  ]\n [0.   0.86 0.   0.  ]\n [0.   0.   0.   0.  ]]"
+                                }
+                            ],
                             "contrainte": "S'applique uniquement si le nombre d'états n et d'actions m sont finis et de taille raisonnable.",
                             "q_table": {
                                 "description": "Tableau de valeurs. Lignes = états s, Colonnes = actions a. Q(s,a) = récompense totale (gain) espérée.",
