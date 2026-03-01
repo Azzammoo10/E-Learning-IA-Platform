@@ -892,6 +892,28 @@ body::before {
 }
 
 /* =============================================
+   RESPONSIVE UTILITY CLASSES
+   ============================================= */
+
+.responsive-grid-250 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--space-4);
+}
+
+.responsive-grid-400 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: var(--space-6);
+}
+
+.responsive-flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+/* =============================================
    RESPONSIVE
    ============================================= */
 
@@ -940,6 +962,23 @@ body::before {
     .stagger-children {
         grid-template-columns: 1fr !important;
         gap: var(--space-3) !important;
+    }
+
+    .responsive-grid-400 {
+        grid-template-columns: 1fr !important;
+        gap: var(--space-4) !important;
+    }
+
+    /* Make chart containers full-width on tablet */
+    [id$="-chart"],
+    [id$="-chart-1"] {
+        max-width: 100% !important;
+    }
+
+    /* Allow long inline code to break */
+    code.inline {
+        word-break: break-all;
+        overflow-wrap: break-word;
     }
 
     .comparison-table {
@@ -1075,6 +1114,39 @@ body::before {
 
     h3 {
         font-size: var(--text-base) !important;
+    }
+
+    /* Stack all responsive grids on mobile */
+    .responsive-grid-250,
+    .responsive-grid-400 {
+        grid-template-columns: 1fr !important;
+        gap: var(--space-3) !important;
+    }
+
+    /* Make flex containers stack vertically when needed */
+    .responsive-flex-wrap {
+        gap: var(--space-2) !important;
+    }
+
+    /* Charts & containers full-width */
+    [id$="-chart"],
+    [id$="-chart-1"] {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    /* Inline code formula overflow */
+    code.inline {
+        word-break: break-all;
+        overflow-wrap: break-word;
+        font-size: 11px !important;
+    }
+
+    /* Info boxes with long formulas */
+    .info-box code.inline {
+        display: inline-block;
+        max-width: 100%;
+        white-space: normal;
     }
 
     .concept-card {

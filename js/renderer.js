@@ -413,7 +413,7 @@ const Renderer = {
         html += `<p style="color:var(--text-secondary);margin-bottom:var(--space-4)">On peut changer la couleur, le style des points et des lignes avec un code court :</p>`;
 
         if (m.apparence) {
-            html += `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:var(--space-4);margin:var(--space-4) 0">`;
+            html += `<div class="responsive-grid-250" style="margin:var(--space-4) 0">`;
             // Colors table
             html += `<div><table class="comparison-table"><tr><th>Code</th><th>Couleur</th></tr>
         ${m.apparence.couleurs.map(c => `<tr><td><code class="inline">${c.code}</code></td><td>${c.valeur}</td></tr>`).join('')}
@@ -462,7 +462,7 @@ const Renderer = {
         // Demo charts
         html += `<h2 style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">Aperçu interactif</h2>`;
         html += `<p style="color:var(--text-secondary);margin-bottom:var(--space-4)">Voici ce que Matplotlib peut produire :</p>`;
-        html += `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:var(--space-6)">
+        html += `<div class="responsive-grid-400">
       <div class="concept-card expanded" style="padding:var(--space-4)"><div id="sincos-chart"></div></div>
       <div class="concept-card expanded" style="padding:var(--space-4)"><div id="bar-chart"></div></div>
     </div>`;
@@ -536,7 +536,7 @@ const Renderer = {
         // Types de données
         html += `<h2 style="font-size:var(--text-xl);font-weight:var(--weight-bold);margin:var(--space-8) 0 var(--space-3)">Les données utilisées</h2>`;
         html += `<p style="color:var(--text-secondary);margin-bottom:var(--space-4)">Le ML peut apprendre à partir de différents types de données :</p>`;
-        html += `<div style="display:flex;flex-wrap:wrap;gap:var(--space-3);margin-bottom:var(--space-6)">`;
+        html += `<div class="responsive-flex-wrap" style="margin-bottom:var(--space-6)">`;
         c.types_de_donnees.forEach(t => {
             html += `<div class="concept-card expanded scroll-reveal" style="padding:var(--space-4);flex:1;min-width:120px;text-align:center">
                 <div class="concept-card-icon" style="width:40px;height:40px;margin:0 auto">${this._svg.document}</div>
@@ -623,7 +623,7 @@ const Renderer = {
 
             // Algorithmes de classification
             html += `<h3 style="font-size:var(--text-lg);font-weight:var(--weight-semibold);margin:var(--space-6) 0 var(--space-3)">Algorithmes courants</h3>`;
-            html += `<div style="display:flex;flex-wrap:wrap;gap:var(--space-2);margin-bottom:var(--space-4)">`;
+            html += `<div class="responsive-flex-wrap" style="gap:var(--space-2);margin-bottom:var(--space-4)">`;
             classification.contenu.algorithmes.forEach(a => {
                 html += `<span class="badge badge-primary" style="padding:var(--space-2) var(--space-3)">${a}</span>`;
             });
